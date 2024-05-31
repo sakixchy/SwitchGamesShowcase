@@ -10,7 +10,7 @@ class Profile(models.Model):
   bio = models.TextField(blank=True)
   image = models.ImageField(
     upload_to='images/',
-    default='../default_profile.jpg'
+    default='../default_profile'
     )
   favorite_renters = models.ManyToManyField (
     User, related_name='favorited_by', blank=True
