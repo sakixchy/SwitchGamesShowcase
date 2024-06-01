@@ -8,15 +8,17 @@ class RentalSerializer(serializers.ModelSerializer):
     profile_image = serializers.ReadOnlyField(source='renter.profile.image.url')
 
     def get_is_owner(self, obj):
-        request = self.context['request']
-        return request.user.id == obj.renter.id
+        request = self.context.get('request')
+        if request and request.user:
+            return request.user.id == obj.renter.id
+        return False
 
 
     class Meta:
        model = Rental
         
        fields = [
-          'id', 'owner', 'renter', 'game', 'rental_start_date',
+          'id', 'owner', 'game', 'rental_start_date',
           'rental_end_date', 'status', 'created_at',
           'updated_at','is_owner','profile_id',
           'profile_image'

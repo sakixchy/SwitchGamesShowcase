@@ -1,5 +1,5 @@
 from django.http import Http404
-from rest_framework import status
+from rest_framework import status, permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Game
@@ -9,7 +9,7 @@ from drf_api_sgr.permissions import IsOwnerOrReadOnly
 
 
 class GameList(APIView):
-    permission_classes = [IsOwnerOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = GameSerializer
 
     def get(self, request):
