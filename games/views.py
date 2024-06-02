@@ -1,5 +1,5 @@
 from django.http import Http404
-from rest_framework import status, permissions
+from rest_framework import permissions,generics, filters
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Game
@@ -8,13 +8,23 @@ from drf_api_sgr.permissions import IsOwnerOrReadOnly
 
 
 
-class GameList(APIView):
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+class GameList(generics.ListCreateAPIView):
+    """
+    List games or create a game if logged in.
+    The perform_create method associates the game with the logged in user.
+    """
     serializer_class = GameSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    queryset = Game.objects.all()
+    filter_backends = [
+        filters.SearchFilter,
+        filters.OrderingFilter
+    ]
+    search_fields = ['title', 'description'] 
+    ordering_fields = ['created_at', 'title']  
 
-    def get(self, request):
-        games = Game.objects.all()
-        serializer = GameSerializer(games, context={'request': request}, many=True)
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
         return Response(serializer.data)
 
     def post(self, request):
@@ -25,6 +35,9 @@ class GameList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class GameDetail(APIView):
+    """
+    Retrieve, update, or delete a game instance.
+    """
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = GameSerializer
 
