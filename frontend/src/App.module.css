@@ -1,0 +1,46 @@
+@font-face {
+    font-family: "generalfont";
+    src: local("generalfont"), url("./assets/fonts/generalfont.ttf") format("truetype");
+  }
+
+
+.App {
+   font-family: "generalfont", monospace;
+   background-color: #e3d1ff;
+   min-height: 100vh;
+}
+
+.Main {
+  padding-top: 81px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: #ffffff;
+  transition: color ease-in-out 0.3s;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:hover i {
+  color: #cd9fed;
+  transition: color ease-in-out 0.3s;
+}
+
+i {
+  color: #ffffff;
+  font-size: 1.6rem;
+  padding: 7px;
+  vertical-align: middle;
+}
+
+i:hover {
+  cursor: pointer;
+  transition: color ease-in-out 0.3s;
+  color: #ffffff;
+}
