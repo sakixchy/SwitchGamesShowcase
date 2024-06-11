@@ -14,7 +14,11 @@ import styles from "../../styles/SignInUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
 
+import { useSetCurrentUser } from "../../contexts/CurrentUserContexts";
+
 function SignInForm() {
+  const setCurrentUser = useSetCurrentUser()
+
   const [signInData, setSignInData] = useState({
     username: "",
     password: "",
@@ -34,11 +38,12 @@ function SignInForm() {
     setErrors(null);
    
     try {
-      await axios.post("/dj-rest-auth/login/", signInData);
-      history.push("/");
+       const {data} = await axios.post("/dj-rest-auth/login/", signInData);
+       setCurrentUser(data.user)
+       history.push("/");
     } catch (err) {
-      setErrors("Error during sign-in. Please check your credentials.");
-      console.error("Error during sign-in:", err);
+       setErrors("Error during sign-in. Please check your credentials.");
+       console.error("Error during sign-in:", err);
     }
   };
 
