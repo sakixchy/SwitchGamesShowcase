@@ -14,6 +14,7 @@ import { Image } from "react-bootstrap";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { axiosReq } from "../../api/axiosDefaults";
 
+
 function GameCreateForm() {
     const [errors, setErrors] = useState({});
   
@@ -48,23 +49,30 @@ function GameCreateForm() {
     const handleSubmit = async (event) => {
         event.preventDefault()
         const formData = new FormData()
+        console.log('51')
 
         formData.append('title', title)
         formData.append('description', description)
         formData.append('is_available', is_available)
-        formData.append('image', imageInput.current.files[0])
-
+        formData.append('cover_image', imageInput.current.files[0])
+        console.log('57')
+        const {data} = await axiosReq.post('/games/', formData);
+        console.log(data) 
         try {
+          console.log('59')
           const {data} = await axiosReq.post('/games/', formData);
           history.push(`/games/${data.id}`)
-        }catch(err) {
+         console.log('61')
+         }catch(err) {
             console.log(err)
             if (err.response?.status !== 401){
-               setErrors(err.response?.data)
-            }
-
-        }
-    }
+             setErrors(err.response?.data)
+               console.log('66')
+         }
+        
+       }
+        console.log('66')
+   }
   
     const textFields = (
       <div className="text-center">
