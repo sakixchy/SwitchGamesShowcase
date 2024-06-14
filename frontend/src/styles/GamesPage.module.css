@@ -1,52 +1,19 @@
-/* GamesPage.module.css */
-
-.gamesContainer {
-    padding-top: 20px;
+.SearchBar input {
+    border-radius: 20px;
+    color: #242a3d;
+    padding-left: 40px;
+    margin-bottom: 16px;
   }
   
-  .gameCard {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .cardImage {
-    height: 300px; /* Adjust height as needed */
-    object-fit: cover;
-  }
-  
-  .cardTitle {
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .cardDescription {
-    flex-grow: 1; /* Allow description to expand */
-  }
-  
-  .availabilityBadge {
+  .Search {
     position: absolute;
-    font-size: 200%;
-    top: 10px;
-    right: 10px;
+    font-size: 1.2rem;
+    padding: 9px;
+    padding-left: 15px;
+    color: rgb(255, 55, 55);
   }
   
-  @media (min-width: 768px) {
-    .gamesContainer {
-      padding-top: 40px;
-    }
-  
-    .gameCard {
-      height: 100%;
-    }
-  
-    .cardImage {
-      height: 400px; /* Adjust height as needed for larger screens */
-    }
-  
-    .cardTitle {
-      font-size: 1.5rem;
-    }
+  .SearchIcon:hover {
+    cursor: default;
+    color: #cfced3;
   }
-  

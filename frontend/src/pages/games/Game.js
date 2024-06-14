@@ -16,9 +16,8 @@ const Game = ({
   is_available,
   updated_at,
 }) => {
-  const currentUser = useCurrentUser();  // Access currentUser from context
+  const currentUser = useCurrentUser();  
 
-  // Determine if the current user is the owner
   const isOwner = currentUser && currentUser.username === owner;
 
   return (

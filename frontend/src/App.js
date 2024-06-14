@@ -6,6 +6,7 @@ import SignUpForm from './pages/auth/SignUpForm';
 import "./api/axiosDefaults";
 import SignInForm from './pages/auth/SignInForm';
 import GameCreateForm from './pages/games/GameCreateForm';
+import GamePage from './pages/games/GamePage';
 import GamesPage from './pages/games/GamesPage';
 
 
@@ -17,11 +18,13 @@ function App() {
           <NavBar/>
           <Container className={styles.Main}>
             <Switch>
-              <Route exact path="/" render={()=> <h1>Hello</h1>} />
+              <Route exact path="/"
+               render={()=>
+                <GamesPage message="No results found. Search for a different game." />} />
               <Route exact path="/signin" render={()=> <SignInForm />} />
               <Route exact path="/signup" render={()=> <SignUpForm />} />
               <Route exact path="/games/create" render={()=> <GameCreateForm />} />
-              <Route exact path="/games/:id" render={() => <GamesPage/> } />
+              <Route exact path="/games/:id" render={() => <GamePage/> } />
               <Route exact path="/rentals" render={()=> <h1>Rentals</h1>} />
               <Route exact path="/profile" render={()=> <h1>Profile</h1>} />
               <Route render={()=> <p>Page not found!</p>} />
