@@ -56,13 +56,19 @@ class GameDetail(APIView):
 
     def put(self, request, pk):
         game = self.get_object(pk)
-        serializer = GameSerializer(game, data=request.data, context={'request': request})
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        if request.user.username == game.owner.username:
+            serializer = GameSerializer(game, data=request.data, context={'request': request})
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response({"detail": "Permission denied."}, status=status.HTTP_403_FORBIDDEN)
 
     def delete(self, request, pk):
         game = self.get_object(pk)
-        game.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        if request.user.username == game.owner.username:
+            game.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        else:
+            return Response({"detail": "Permission denied."}, status=status.HTTP_403_FORBIDDEN)

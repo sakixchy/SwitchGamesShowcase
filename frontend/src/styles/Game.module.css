@@ -1,0 +1,64 @@
+.Game {
+  margin-bottom: 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+  background-color: #ff5050;
+}
+
+.Game:hover {
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.1);
+}
+
+.Avatar {
+  margin-right: 10px;
+}
+
+.CoverImageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 200px; 
+  overflow: hidden;
+  background-color: #f8f9fa; 
+}
+
+.CoverImage {
+  width: 200px;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.Title {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.Description {
+  text-align: justify;
+}
+
+.Availability {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  font-size: 135%;
+}
+
+.Available {
+  background-color: #28a745;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.Rented {
+  background-color: #6c757d;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
