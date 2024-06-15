@@ -10,6 +10,7 @@ import styles from '../../styles/GamesPage.module.css'
 import { useLocation } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import NoResults from "../../assets/images/luigi-no-results.png";
+import { fetchMoreData } from "../../utils/utils";
 
 function GamesPage({ message, filter = "" }) {
   const [games, setGames] = useState({ results: [] });
@@ -56,9 +57,17 @@ function GamesPage({ message, filter = "" }) {
         {hasLoaded ? (
           <>
             {games.results.length ? (
-              games.results.map((games) => (
-                <Game key={games.id} {...games} setPosts={setGames} />
-              ))
+              <InfiniteScroll
+                children={
+                  games.results.map((games) => (
+                    <Game key={games.id} {...games} setPosts={setGames} />
+                  ))
+                }
+                datalength={games.results.length}
+                loader={<Asset spinner/>}
+                hasMore={!!games.next}
+                next={() => fetchMoreData(games, setGames)} 
+               />
             ) : (
               <Container className={appStyles.Content}>
                 <Asset src={NoResults} message={message} />
