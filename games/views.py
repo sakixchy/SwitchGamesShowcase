@@ -57,7 +57,8 @@ class GameDetail(APIView):
     def put(self, request, pk):
         game = self.get_object(pk)
         if request.user.username == game.owner.username:
-            serializer = GameSerializer(game, data=request.data, context={'request': request})
+            serializer = GameSerializer(game, data=request.data, partial=True,
+             context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data)

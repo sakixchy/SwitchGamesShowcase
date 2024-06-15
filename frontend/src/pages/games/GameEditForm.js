@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
@@ -13,9 +13,10 @@ import styles from "../../styles/GameCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import Asset from "../../components/Asset";
+import { useParams } from "react-router-dom";
 
 
-function GameCreateForm() {
+function GameEditForm() {
   const [errors, setErrors] = useState({});
   const [postData, setPostData] = useState({
     title: "",
@@ -27,6 +28,21 @@ function GameCreateForm() {
 
   const imageInput = useRef(null);
   const history = useHistory();
+  const { id } = useParams();
+
+  useEffect(() => {
+    const handleMount = async () => {
+        try {
+          const {data} = await axiosReq.get(`/games/${id}/`)
+          const {title, description, cover_image, is_available, owner} = data;
+
+          owner ? setPostData({title, description, cover_image, is_available}) : history.push('/')
+        } catch(err) {
+
+        }
+    }
+    handleMount()
+  }, [history, id]);
 
   const handleChange = (event) => {
     setPostData({
@@ -47,17 +63,21 @@ function GameCreateForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-      const formData = new FormData();
-      formData.append("title", title);
-      formData.append("description", description);
-      formData.append("is_available", is_available);
-      formData.append("cover_image", imageInput.current.files[0]);
+    const formData = new FormData();
 
-      const { data } = await axiosReq.post('/games/', formData);
-      history.push(`/games/${data.id}`);
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("is_available", is_available);
+
+    if (imageInput?.current?.files[0]) {
+      formData.append("cover_image", imageInput.current.files[0]);
+    }
+
+    try {
+      await axiosReq.put(`/games/${id}/`, formData);
+      history.push(`/games/${id}`);
     } catch (err) {
-      console.error(err);
+      console.log(err);
       if (err.response?.status !== 401) {
         setErrors(err.response?.data);
       }
@@ -95,19 +115,18 @@ function GameCreateForm() {
           {message}
         </Alert>
       ))}
-     <Form.Group controlId="is_available">
-          <Form.Check
+      <Form.Group controlId="is_available">
+      <Form.Check
         type="checkbox"
         name="is_available"
         label="Is Available"
         checked={is_available}
         onChange={() => {
-          setPostData(prevState => ({
+            setPostData(prevState => ({
             ...prevState,
-            is_available: !prevState.is_available
-          }));
-        }}
-     />
+            is_available: !prevState.is_available}));
+     }}
+/>
       </Form.Group>
 
       <Button
@@ -117,7 +136,7 @@ function GameCreateForm() {
         Cancel
       </Button>
       <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
-        List a game
+        Save Changes
       </Button>
     </div>
   );
@@ -172,4 +191,4 @@ function GameCreateForm() {
   );
 }
 
-export default GameCreateForm;
+export default GameEditForm;

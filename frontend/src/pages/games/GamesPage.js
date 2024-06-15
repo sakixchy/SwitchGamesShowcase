@@ -10,6 +10,7 @@ import styles from '../../styles/GamesPage.module.css'
 import { useLocation } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import NoResults from "../../assets/images/luigi-no-results.png";
+import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
 
 function GamesPage({ message, filter = "" }) {
@@ -42,7 +43,7 @@ function GamesPage({ message, filter = "" }) {
 
   return (
     <Row className="h-100">
-      <Col className="py-2 p-0 p-lg-2" lg={4}>
+      <Col className="py-2 p-0 p-lg-2" lg={6}>
         <p>Discover Games</p>
         <i className={`fas fa-search ${styles.Search}`}></i>
         <Form className={styles.SearchBar}
@@ -63,10 +64,10 @@ function GamesPage({ message, filter = "" }) {
                     <Game key={games.id} {...games} setPosts={setGames} />
                   ))
                 }
-                datalength={games.results.length}
-                loader={<Asset spinner/>}
+                dataLength={games.results.length}
+                next={fetchMoreData}
                 hasMore={!!games.next}
-                next={() => fetchMoreData(games, setGames)} 
+                loader={<Asset spinner />} 
                />
             ) : (
               <Container className={appStyles.Content}>
