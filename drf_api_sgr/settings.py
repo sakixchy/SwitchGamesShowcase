@@ -99,6 +99,7 @@ INSTALLED_APPS = [
     'games',
     'rentals',
     'profiles',
+    'chats',
 ]
 SITE_ID = 1
 MIDDLEWARE = [
