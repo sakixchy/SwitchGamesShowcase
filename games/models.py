@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class Game(models.Model):
@@ -15,3 +17,11 @@ class Game(models.Model):
 
     def __str__(self):
         return self.title
+
+@receiver(post_save, sender=Game)
+def create_chat_on_game_creation(sender, instance, created, **kwargs):
+    if created:
+        sender_user = instance.owner  
+        receiver_user = sender_user 
+        
+        Chat.objects.create(sender=sender_user, receiver=receiver_user, game=instance)

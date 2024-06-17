@@ -50,9 +50,18 @@ class MessageListCreateView(generics.ListCreateAPIView):
         return Message.objects.filter(chat_id=chat_id)
 
     def perform_create(self, serializer):
+        print('IN PERFORM_CREATE FUNCTION')
         chat_id = self.kwargs.get('chat_id')
+        print('chat_id: ', chat_id)
         try:
+            print('IN TRY BLOCK')
+            print('chat_id: ', chat_id)
+            print('CHAT: ', Chat.objects.get(pk=chat_id))
             chat = Chat.objects.get(pk=chat_id)
+            print('CHAT: ', chat)
+            print('SERIALIZER: ', serializer)
             serializer.save(chat=chat, sender=self.request.user)
-        except Chat.DoesNotExist:
-            raise ValidationError('Chat does not exist.')
+        except Exception as e:
+            print("------e------", e)
+        # except Chat.DoesNotExist:
+        #     raise ValidationError('Chat does not exist.')

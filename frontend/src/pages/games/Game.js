@@ -1,9 +1,9 @@
-import React from 'react';
-import { Card, Badge } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import Avatar from '../../components/Avatar';
-import styles from '../../styles/Game.module.css';
-import { useCurrentUser } from '../../contexts/CurrentUserContexts';
+import React from "react";
+import { Card, Badge } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import Avatar from "../../components/Avatar";
+import styles from "../../styles/Game.module.css";
+import { useCurrentUser } from "../../contexts/CurrentUserContexts";
 
 const Game = ({
   id,
@@ -15,10 +15,16 @@ const Game = ({
   cover_image,
   is_available,
   updated_at,
+  onChatOpen,
+  
 }) => {
-  const currentUser = useCurrentUser();  
+  const currentUser = useCurrentUser();
 
   const isOwner = currentUser && currentUser.username === owner;
+
+  const handleChatClick = () => {
+    onChatOpen(id, owner, title);
+  };
 
   return (
     <Card className={styles.Game}>
@@ -51,7 +57,7 @@ const Game = ({
             <Link to={`/games/${id}/edit`} className="btn btn-warning mt-2">
               Edit Game
             </Link>
-            <button className="btn btn-danger mt-2 ml-2" >
+            <button className="btn btn-danger mt-2 ml-2">
               Delete Game
             </button>
           </div>
@@ -61,6 +67,12 @@ const Game = ({
             Request to Rent
           </button>
         )}
+        <button
+          className={`btn btn-link ${styles.ChatButton}`}
+          onClick={handleChatClick} >
+          <i className={`fas fa-comment ${styles.ChatIcon}`} />
+          <span className={styles.ChatText}>Chat Now</span>
+        </button>
       </Card.Body>
     </Card>
   );

@@ -17,3 +17,12 @@
     cursor: default;
     color: #cfced3;
   }
+
+  .ChatFormContainer {
+  position: fixed;   /* Position fixed so it stays in place */
+  bottom: 0;          /* Align to the bottom of the viewport or container */
+  width: 600px;        /* Occupy full width */
+  background-color: #ffffff; /* Optionally, set a background color */
+  padding: 15px;      /* Adjust padding as needed */
+  box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1); 
+  }

@@ -62,3 +62,62 @@
   padding: 5px 10px;
   border-radius: 5px;
 }
+
+.ChatButton  {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: #9e0df8;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.ChatButton:hover {
+  text-decoration: none;
+  color: #f8f9fa; 
+  font-size: 16px; 
+  box-shadow: 0 0 8px 0 rgba(255, 255, 255, 0.8); 
+}
+
+
+/* Chat Icon */
+.ChatIcon {
+  margin-right: 5px;
+  text-decoration: none;
+  
+}
+
+/* Chat Text */
+.ChatText {
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none; 
+}
+
+.ChatButton:hover {
+  text-decoration: none;
+  color: #f8f9fa;
+  
+}
+
+@media (max-width: 576px) {
+  /* Adjustments for mobile screens */
+  .ChatButton {
+    padding: 6px 10px; /* Smaller padding */
+  }
+  
+  /* Smaller icon size */
+  .ChatIcon {
+    font-size: 16px; 
+  }
+  
+  /* Hide text on smaller screens */
+  .ChatText {
+    display: none; 
+  }
+}
