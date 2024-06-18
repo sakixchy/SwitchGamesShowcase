@@ -30,7 +30,10 @@ urlpatterns = [
     path('api/', include('profiles.urls')),
     path('api/', include('games.urls')),
     path('api/', include('rentals.urls')),
-    path('api/', include('chats.urls')),
+    path('api/', include('likes.urls')),
+    path('api/', include('comments.urls')),
+    path('api/', include('follower.urls')),
 ]
+
 
 handler404 = TemplateView.as_view(template_name='index.html')
