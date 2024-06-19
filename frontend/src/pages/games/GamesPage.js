@@ -42,7 +42,7 @@ function GamesPage({ message, filter = "" }) {
 
   return (
     <Row className="h-100">
-      <Col className="py-2 p-0 p-lg-2" lg={6}>
+      <Col className="py-2 p-0 p-lg-2" lg={8}>
         <p>Discover Games</p>
         <i className={`fas fa-search ${styles.Search}`}></i>
         <Form className={styles.SearchBar} onSubmit={(event) => event.preventDefault()}>
@@ -64,7 +64,7 @@ function GamesPage({ message, filter = "" }) {
                 loader={<Asset spinner />}
               >
                 {games.results.map((game) => (
-                  <Game key={game.id} {...game} />
+                  <Game key={game.id} {...game} setGames={setGames} />
                 ))}
               </InfiniteScroll>
             ) : (

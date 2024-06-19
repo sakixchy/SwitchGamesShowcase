@@ -1,9 +1,11 @@
 import React from "react";
-import { Card, Badge } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Card, Badge, OverlayTrigger, Tooltip, Button } from "react-bootstrap";
+import { Link, useHistory } from "react-router-dom";
 import Avatar from "../../components/Avatar";
 import styles from "../../styles/Game.module.css";
+import btnStyles from "../../styles/Button.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContexts";
+import { axiosRes } from "../../api/axiosDefaults";
 
 const Game = ({
   id,
@@ -15,16 +17,59 @@ const Game = ({
   cover_image,
   is_available,
   updated_at,
-  onChatOpen,
+  like_id,
+  likes_count,
+  comments_count,
+  setGames
   
 }) => {
   const currentUser = useCurrentUser();
-
   const isOwner = currentUser && currentUser.username === owner;
+  const history = useHistory();
 
-  const handleChatClick = () => {
-    onChatOpen(id, owner, title);
+  const handleRequestToRent = () => {
+    if (!currentUser) {
+      history.push('/signin'); 
+    } else {
+      alert('working on it!')
+    }
   };
+
+
+  const handleLike = async () => {
+    try {
+      const { data } = await axiosRes.post('/likes/', { game: id });
+      setGames(prevGames => ({
+        ...prevGames,
+        results: prevGames.results.map(game =>
+          game.id === id
+            ? { ...game, likes_count: game.likes_count + 1, like_id: data.id }
+            : game
+        )
+      }));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  
+
+  const handleUnlike = async () => {
+    try {
+      await axiosRes.delete(`/likes/${like_id}/`);
+      setGames(prevGames => ({
+        ...prevGames,
+        results: prevGames.results.map(game =>
+          game.id === id
+            ? { ...game, likes_count: game.likes_count - 1, like_id: null }
+            : game
+        )
+      }));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  
+
 
   return (
     <Card className={styles.Game}>
@@ -63,16 +108,52 @@ const Game = ({
           </div>
         )}
         {!isOwner && (
-          <button className="btn btn-primary mt-2">
-            Request to Rent
-          </button>
+          <OverlayTrigger
+            placement="top"
+            overlay={
+              <Tooltip id="request-to-rent-tooltip">
+                {currentUser ? "Request to rent this game" : "Log in to request to rent!"}
+              </Tooltip>
+            }
+          >
+            <Button
+              className={btnStyles.Button}
+              onClick={handleRequestToRent}
+              style={{ fontSize: '10px' }}
+            >
+              <i className="fa-solid fa-hand"></i> Request to Rent
+            </Button>
+          </OverlayTrigger>
         )}
-        <button
-          className={`btn btn-link ${styles.ChatButton}`}
-          onClick={handleChatClick} >
-          <i className={`fas fa-comment ${styles.ChatIcon}`} />
-          <span className={styles.ChatText}>Chat Now</span>
-        </button>
+      {isOwner ? (
+            <OverlayTrigger
+              placement="top"
+              overlay={<Tooltip>You can't like your own game!</Tooltip>}
+            >
+              <i className="far fa-heart" />
+            </OverlayTrigger>
+          ) : like_id ? (
+            <span onClick={handleUnlike}>
+              <i className={`fas fa-heart ${styles.Heart}`} />
+            </span>
+          ) : currentUser ? (
+            <span onClick={handleLike}>
+              <i className={`far fa-heart ${styles.HeartOutline}`} />
+            </span>
+          ) : (
+            <OverlayTrigger
+              placement="top"
+              overlay={<Tooltip>Log in to like this game!</Tooltip>}
+            >
+              <i className="far fa-heart" />
+            </OverlayTrigger>
+          )}
+          {likes_count}
+          <Link to={`/games/${id}`}>
+            <i className="far fa-comments" />
+          </Link>
+          {comments_count}
+
       </Card.Body>
     </Card>
   );
