@@ -52,46 +52,37 @@ class GameList(generics.ListCreateAPIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class GameDetail(APIView):
-    """
-    Retrieve, update, or delete a game instance.
-    """
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = GameSerializer
-    queryset = Game.objects.annotate(
-        likes_count=Count('likes', distinct=True),
-        comments_count=Count('comment', distinct=True)
-    ).order_by('-created_at')
 
     def get_object(self, pk):
         try:
-            game = Game.objects.get(pk=pk)
-            self.check_object_permissions(self.request, game)
-            return game
+        
+            return Game.objects.annotate(
+                likes_count=Count('likes', distinct=True),
+                comments_count=Count('comment', distinct=True)
+            ).get(pk=pk)
         except Game.DoesNotExist:
             raise Http404
 
     def get(self, request, pk):
         game = self.get_object(pk)
-        serializer = GameSerializer(game)
+        serializer = GameSerializer(game, context={'request': request})
         return Response(serializer.data)
 
     def put(self, request, pk):
         game = self.get_object(pk)
-        if request.user.username == game.owner.username:
-            serializer = GameSerializer(game, data=request.data, partial=True,
-             context={'request': request})
-            if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        else:
-            return Response({"detail": "Permission denied."}, status=status.HTTP_403_FORBIDDEN)
+        self.check_object_permissions(request, game)  
+        serializer = GameSerializer(game, data=request.data, partial=True, context={'request': request})
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
         game = self.get_object(pk)
-        if request.user.username == game.owner.username:
-            game.delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
-        else:
-            return Response({"detail": "Permission denied."}, status=status.HTTP_403_FORBIDDEN)
+        self.check_object_permissions(request, game)
+        game.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

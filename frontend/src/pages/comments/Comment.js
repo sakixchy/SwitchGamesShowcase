@@ -1,25 +1,95 @@
-import React from "react";
-import { Media } from "react-bootstrap";
+import React, { useState } from "react";
+import { Button, Media } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Avatar from "../../components/Avatar";
 import styles from "../../styles/Comment.module.css";
+import { axiosRes } from "../../api/axiosDefaults";
+import { useCurrentUser } from "../../contexts/CurrentUserContexts";
+import CommentEditForm from "./CommentEditForm";
 
 const Comment = (props) => {
-  const { profile_id, profile_image, owner, updated_at, content } = props;
+  const {
+    profile_id,
+    profile_image,
+    owner,
+    updated_at,
+    content,
+    id,
+    setGame,
+    setComments,
+  } = props;
+
+  const handleDelete = async () => {
+    try {
+      await axiosRes.delete(`/comments/${id}/`);
+      setGame((prevGame) => ({
+        results: [
+          {
+            ...prevGame.results[0],
+            comments_count: prevGame.results[0].comments_count - 1,
+          },
+        ],
+      }));
+      setComments((prevComments) => ({
+        ...prevComments,
+        results: prevComments.results.filter((comment) => comment.id !== id),
+      }));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const currentUser = useCurrentUser();
+  const isOwner = currentUser?.username === owner;
+  const [showEditForm, setShowEditForm] = useState(false);
 
   return (
-    <div>
+    <div className={styles.CommentContainer}>
       <hr />
       <Media>
         <Link to={`/profiles/${profile_id}`}>
           <Avatar src={profile_image} />
         </Link>
         <Media.Body className="align-self-center ml-2">
-          <span className={styles.Owner}>{owner}</span>
-          <span className={styles.Date}>{updated_at}</span>
-          <p>{content}</p>
+          <div className={styles.CommentHeader}>
+            <span className={styles.Owner}>{owner}</span>
+            <span className={styles.Date}>
+              {new Date(updated_at).toLocaleDateString()}
+            </span>
+          </div>
+          {showEditForm ? (
+            <CommentEditForm
+              id={id}
+              profile_id={profile_id}
+              content={content}
+              setComments={setComments}
+              setShowEditForm={setShowEditForm}
+            />
+          ) : (
+            <p>{content}</p>
+          )}
         </Media.Body>
       </Media>
+      {isOwner && !showEditForm && (
+        <div className={styles.ButtonContainer}>
+          <Button
+            variant="outline-secondary"
+            size="sm"
+            onClick={() => setShowEditForm(true)}
+            className={styles.EditButton}
+          >
+            Edit
+          </Button>
+          <Button
+            variant="outline-danger"
+            size="sm"
+            onClick={handleDelete}
+            className={styles.DeleteButton}
+          >
+            Delete
+          </Button>
+        </div>
+      )}
     </div>
   );
 };

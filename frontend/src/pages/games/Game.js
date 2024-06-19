@@ -20,8 +20,8 @@ const Game = ({
   like_id,
   likes_count,
   comments_count,
-  setGames
-  
+  setGames,
+
 }) => {
   const currentUser = useCurrentUser();
   const isOwner = currentUser && currentUser.username === owner;
@@ -34,18 +34,27 @@ const Game = ({
       alert('working on it!')
     }
   };
+  
 
+  const handleDelete = async () => {
+    try {
+      await axiosRes.delete(`/games/${id}/`);
+      history.goBack();
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const handleLike = async () => {
     try {
       const { data } = await axiosRes.post('/likes/', { game: id });
       setGames(prevGames => ({
         ...prevGames,
-        results: prevGames.results.map(game =>
-          game.id === id
+        results: prevGames.results.map((game) => {
+          return game.id === id
             ? { ...game, likes_count: game.likes_count + 1, like_id: data.id }
-            : game
-        )
+            : game;
+        }),
       }));
     } catch (err) {
       console.log(err);
@@ -102,7 +111,8 @@ const Game = ({
             <Link to={`/games/${id}/edit`} className="btn btn-warning mt-2">
               Edit Game
             </Link>
-            <button className="btn btn-danger mt-2 ml-2">
+            <button className="btn btn-danger mt-2 ml-2"
+             onClick={handleDelete}>
               Delete Game
             </button>
           </div>
@@ -153,10 +163,10 @@ const Game = ({
             <i className="far fa-comments" />
           </Link>
           {comments_count}
-
       </Card.Body>
     </Card>
   );
 };
 
 export default Game;
+
