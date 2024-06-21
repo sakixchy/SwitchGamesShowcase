@@ -14,6 +14,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
 import PopularProfiles from "../profiles/PopularProfiles";
 
+
 function GamesPage({ message, filter = "" }) {
   const [games, setGames] = useState({ results: [] });
   const [hasLoaded, setHasLoaded] = useState(false);
@@ -44,7 +45,7 @@ function GamesPage({ message, filter = "" }) {
   return (
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={8}>
-        <p>Discover Games</p>
+        <PopularProfiles mobile/>
         <i className={`fas fa-search ${styles.Search}`}></i>
         <Form className={styles.SearchBar} onSubmit={(event) => event.preventDefault()}>
           <Form.Control
