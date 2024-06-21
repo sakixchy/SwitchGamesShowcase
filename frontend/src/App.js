@@ -9,6 +9,7 @@ import GameCreateForm from './pages/games/GameCreateForm';
 import GamePage from './pages/games/GamePage';
 import GamesPage from './pages/games/GamesPage';
 import GameEditForm from './pages/games/GameEditForm';
+import ProfilePage from './pages/profiles/ProfilePage';
 
 
 
@@ -28,7 +29,7 @@ function App() {
               <Route exact path="/games/:id" render={() => <GamePage/> } />
               <Route exact path="/games/:id/edit" render={() => <GameEditForm/> } />
               <Route exact path="/rentals" render={()=> <h1>Rentals</h1>} />
-              <Route exact path="/profile" render={()=> <h1>Profile</h1>} />
+              <Route exact path="/profiles/:id" render={()=> <ProfilePage />} />
               <Route render={()=> <p>Page not found!</p>} />
             </Switch>
           </Container>
