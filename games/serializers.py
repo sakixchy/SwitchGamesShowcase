@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import Game
 from likes.models import Like
 
+
 class GameSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')
@@ -10,6 +11,7 @@ class GameSerializer(serializers.ModelSerializer):
     likes_count = serializers.IntegerField(read_only=True)
     comments_count = serializers.IntegerField(read_only=True)
     is_owner = serializers.SerializerMethodField()
+    
 
     def validate_cover_image(self, value):
         if value.size > 2 * 1024 * 1024:

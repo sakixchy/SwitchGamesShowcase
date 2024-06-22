@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
+from games.models import Game
 
 
 class Profile(models.Model):
@@ -12,9 +13,7 @@ class Profile(models.Model):
     upload_to='images/',
     default='../default_profile'
     )
-  favorite_renters = models.ManyToManyField (
-    User, related_name='favorited_by', blank=True
-    )
+  wishlist = models.ManyToManyField(Game, related_name='wishlisted_by', blank=True)
   created_at = models.DateTimeField(auto_now_add=True)
   updated_at = models.DateTimeField(auto_now=True)
 

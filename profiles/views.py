@@ -38,5 +38,7 @@ class ProfileDetail(generics.RetrieveUpdateAPIView):
         games_count=Count('owner__owned_games', distinct=True),
         followers_count=Count('owner__followed', distinct=True),
         following_count=Count('owner__following', distinct=True)
-    ).order_by('-created_at')
+    ).order_by('-created_at').prefetch_related('wishlist')
     serializer_class = ProfileSerializer
+
+    

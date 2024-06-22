@@ -12,24 +12,36 @@ import { useParams } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useProfileData, useSetProfileData } from "../../contexts/ProfileDataContext";
 import { Button, Image } from "react-bootstrap";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { fetchMoreData } from "../../utils/utils";
+import NoResults from "../../assets/images/luigi-no-results.png";
+import Game from "../games/Game";
+
+
 
 function ProfilePage() {
   const [hasLoaded, setHasLoaded] = useState(false);
   const currentUser = useCurrentUser();
   const { id } = useParams();
-  const setProfileData = useSetProfileData();
+  const {setProfileData, handleFollow, handleUnfollow} = useSetProfileData();
   const { pageProfile } = useProfileData();
   const [profile] = pageProfile.results;
   const isOwner = currentUser?.username === profile?.owner;
 
+  const [profileGames, setProfileGames] = useState({ results: [] });
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data: pageProfile } = await axiosReq.get(`/profiles/${id}/`);
+        const [{ data: pageProfile } , { data: profileGames }] = await Promise.all([
+            axiosReq.get(`/profiles/${id}/`),
+            axiosReq.get(`/games/?owner__profile=${id}`),
+          ]);
         setProfileData((prevState) => ({
           ...prevState,
           pageProfile: { results: [pageProfile] },
         }));
+        setProfileGames(profileGames);
         setHasLoaded(true);
       } catch (err) {
         console.log(err);
@@ -38,45 +50,6 @@ function ProfilePage() {
     fetchData();
   }, [id, setProfileData]);
 
-  const handleFollow = async () => {
-    try {
-      const { data } = await axiosReq.post(`/profiles/${profile.id}/follow/`);
-      setProfileData((prevState) => ({
-        ...prevState,
-        pageProfile: {
-          results: [
-            {
-              ...profile,
-              followers_count: profile.followers_count + 1,
-              following_id: data.id,
-            },
-          ],
-        },
-      }));
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const handleUnfollow = async () => {
-    try {
-      await axiosReq.delete(`/profiles/${profile.id}/follow/`);
-      setProfileData((prevState) => ({
-        ...prevState,
-        pageProfile: {
-          results: [
-            {
-              ...profile,
-              followers_count: profile.followers_count - 1,
-              following_id: null,
-            },
-          ],
-        },
-      }));
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   const mainProfile = (
     <>
@@ -112,14 +85,14 @@ function ProfilePage() {
             (profile?.following_id ? (
               <Button
                 className={`${btnStyles.Button} ${btnStyles.BlackOutline}`}
-                onClick={handleUnfollow}
+                onClick={handleUnfollow(profile)}
               >
                 Unfollow
               </Button>
             ) : (
               <Button
                 className={`${btnStyles.Button} ${btnStyles.Black}`}
-                onClick={handleFollow}
+                onClick={handleFollow(profile)}
               >
                 Follow
               </Button>
@@ -133,8 +106,24 @@ function ProfilePage() {
   const mainProfileGames = (
     <>
       <hr />
-      <p className="text-center">Profile owner's Games</p>
+      <p className="text-center">{profile?.owner}'s games</p>
       <hr />
+      {profileGames.results.length ? (
+        <InfiniteScroll
+          children={profileGames.results.map((game) => (
+            <Game key={game.id} {...game} setGames={setProfileGames} />
+          ))}
+          dataLength={profileGames.results.length}
+          loader={<Asset spinner />}
+          hasMore={!!profileGames.next}
+          next={() => fetchMoreData(profileGames, setProfileGames)}
+        />
+      ) : (
+        <Asset
+          src={NoResults}
+          message={`No results found, ${profile?.owner} hasn't listed any games yet.`}
+        />
+      )}
     </>
   );
 

@@ -10,6 +10,7 @@ import { fetchMoreData } from "../../utils/utils";
 import CommentCreateForm from "../comments/CommentCreateForm";
 import Comment from "../comments/Comment"
 import { useCurrentUser } from "../../contexts/CurrentUserContexts";
+import PopularProfiles from "../profiles/PopularProfiles";
 
 function GamePage() {
     const { id } = useParams();
@@ -41,7 +42,7 @@ function GamePage() {
     return (
       <Row className="h-100">
         <Col className="py-2 p-0 p-lg-2" lg={8}>
-          <p>Popular profiles for mobile</p>
+         <PopularProfiles mobile />
           <Game {...game.results[0]} setGames={setGame} />
           <Container>
             {currentUser ? (
@@ -78,7 +79,7 @@ function GamePage() {
           </Container>
         </Col>
         <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
-          Popular profiles for desktop
+        <PopularProfiles />
         </Col>
       </Row>
     );

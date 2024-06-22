@@ -5,6 +5,7 @@ import Avatar from '../../components/Avatar'
 import { useCurrentUser } from '../../contexts/CurrentUserContexts';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
+import { useSetProfileData } from '../../contexts/ProfileDataContext';
 
 const Profile = (props) => {
     const {profile, mobile, imageSize=55} = props;
@@ -12,6 +13,16 @@ const Profile = (props) => {
 
     const currentUser = useCurrentUser()
     const isOwner = currentUser?.username === owner;
+
+    const { handleFollow, handleUnfollow } = useSetProfileData();
+
+    const toggleFavorite = () => {
+        if (following_id) {
+            handleUnfollow(profile);
+        } else {
+            handleFollow(profile);
+        }
+    };
 
   return (
     <div className={`my-3 d-flex align-items-center ${mobile && 'flex-column'}`}>
@@ -26,17 +37,21 @@ const Profile = (props) => {
         <div className={`text-right ${!mobile && 'ml-auto'}`}>
             {!mobile && currentUser && !isOwner && (
                 following_id ? (
-                    <Button 
-                    className={btnStyles.Button} 
-                    style={{ backgroundColor: 'purple' }} 
-                    onClick={()=>{}}>unfollow</Button>
+                    <Button
+                    className={btnStyles.Button}
+                    style={{ backgroundColor: 'purple' }}
+                    onClick={() => handleUnfollow(profile)}>unfollow</Button>
                 ): (
                     <Button
                     className={`${btnStyles.Button} 
                     ${btnStyles.Black}`}
-                    onClick={()=>{}}>follow</Button>
+                    onClick={() => handleFollow(profile)}>follow</Button>
                 )
             )}
+        </div>
+        <div>
+            <i className="fas fa-solid-heart"></i>
+            <p>Favorite Renter</p>
         </div>
     </div>
   )
