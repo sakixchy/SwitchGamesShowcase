@@ -8,11 +8,13 @@ from drf_api_sgr.permissions import IsRenterOrReadOnly
 
 
 class RentalList(generics.ListCreateAPIView):
-    """
-    List rentals or create a new rental if logged in.
-    """
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = RentalSerializer
+    queryset = Rental.objects.all()
+    ordering = ['-created_at']  
+
+    def perform_create(self, serializer):
+        serializer.save(renter=self.request.user)
 
     def get_queryset(self):
         return Rental.objects.all()

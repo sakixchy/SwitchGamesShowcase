@@ -28,11 +28,17 @@ const Game = ({
   const isOwner = currentUser && currentUser.username === owner;
   const history = useHistory();
 
-  const handleRequestToRent = () => {
-    if (!currentUser) {
-      history.push('/signin'); 
-    } else {
-      alert('working on it!')
+  const handleRequestToRent = async () => {
+    try {
+      if (!currentUser) {
+        history.push('/signin'); 
+      } else {
+        const { data } = await axiosRes.post('/rentals/', { game: id });
+        alert('Rental request sent successfully!');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Failed to send rental request.');
     }
   };
   
