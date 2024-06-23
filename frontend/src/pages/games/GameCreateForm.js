@@ -22,8 +22,9 @@ function GameCreateForm() {
     description: "",
     is_available: false,
     cover_image: "",
+    genre:"",
   });
-  const { title, description, is_available, cover_image } = postData;
+  const { title, description, is_available, cover_image, genre } = postData;
 
   const imageInput = useRef(null);
   const history = useHistory();
@@ -53,6 +54,7 @@ function GameCreateForm() {
       formData.append("description", description);
       formData.append("is_available", is_available);
       formData.append("cover_image", imageInput.current.files[0]);
+      formData.append("genre", genre )
 
       const { data } = await axiosReq.post('/games/', formData);
       history.push(`/games/${data.id}`);
@@ -63,6 +65,18 @@ function GameCreateForm() {
       }
     }
   };
+
+  const genreOptions = [
+    { value: '', label: 'Select Genre' },
+    { value: 'platformer', label: 'Platformer' },
+    { value: 'racing', label: 'Racing' },
+    { value: 'rpg', label: 'RPG' },
+    { value: 'action', label: 'Action' },
+    { value: 'adventure', label: 'Adventure' },
+    { value: 'fighting', label: 'Fighting' },
+    { value: 'classic', label: 'Classic' },
+    
+  ]
 
   const textFields = (
     <div className="text-center">
@@ -91,6 +105,26 @@ function GameCreateForm() {
         />
       </Form.Group>
       {errors?.description && errors.description.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
+       <Form.Group>
+        <Form.Label>Genre</Form.Label>
+        <Form.Control
+          as="select"
+          name="genre"
+          value={genre}
+          onChange={handleChange}
+        >
+          {genreOptions.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </Form.Control>
+      </Form.Group>
+      {errors?.genre && errors.genre.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>

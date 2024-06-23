@@ -16,14 +16,6 @@ const Profile = (props) => {
 
     const { handleFollow, handleUnfollow } = useSetProfileData();
 
-    const toggleFavorite = () => {
-        if (following_id) {
-            handleUnfollow(profile);
-        } else {
-            handleFollow(profile);
-        }
-    };
-
   return (
     <div className={`my-3 d-flex align-items-center ${mobile && 'flex-column'}`}>
         <div>

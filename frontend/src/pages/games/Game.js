@@ -20,6 +20,7 @@ const Game = ({
   like_id,
   likes_count,
   comments_count,
+  genre,
   setGames,
 
 }) => {
@@ -98,6 +99,7 @@ const Game = ({
       </Link>
       <Card.Body>
         {title && <Card.Title className={styles.Title}>{title}</Card.Title>}
+        {genre && <Badge className="ml-2" variant="info">{genre}</Badge>}
         {description && <Card.Text className={styles.Description}>{description}</Card.Text>}
         <div className={styles.Availability}>
           {is_available ? (

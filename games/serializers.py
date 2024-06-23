@@ -40,5 +40,5 @@ class GameSerializer(serializers.ModelSerializer):
             'id', 'owner', 'title', 'description', 'cover_image',
             'is_available', 'created_at', 'updated_at',
             'profile_id', 'profile_image', 'is_owner', 'likes_count', 
-            'comments_count', 'like_id',
+            'comments_count', 'like_id', 'genre',
         ]
