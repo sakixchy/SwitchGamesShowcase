@@ -41,10 +41,6 @@ const Profile = (props) => {
                 )
             )}
         </div>
-        <div>
-            <i className="fas fa-solid-heart"></i>
-            <p>Favorite Renter</p>
-        </div>
     </div>
   )
 }
