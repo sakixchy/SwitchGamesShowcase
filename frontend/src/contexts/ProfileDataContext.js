@@ -21,7 +21,9 @@ export const ProfileDataProvider = ({ children }) => {
     try {
       const { data } = await axiosRes.post("/follower/", {
         followed: clickedProfile.id,
+        
       });
+      console.log("data received from post /folllower/", data)
 
       setProfileData((prevState) => ({
         ...prevState,
