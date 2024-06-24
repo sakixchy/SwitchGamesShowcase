@@ -18,7 +18,6 @@ class Game(models.Model):
     description = models.TextField()
     cover_image = models.ImageField(upload_to='game_covers/')
     genre = models.CharField(max_length=20, choices=GENRE_CHOICES, default='adventure')
-    is_available = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

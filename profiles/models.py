@@ -13,7 +13,6 @@ class Profile(models.Model):
     upload_to='images/',
     default='../default_profile'
     )
-  wishlist = models.ManyToManyField(Game, related_name='wishlisted_by', blank=True)
   created_at = models.DateTimeField(auto_now_add=True)
   updated_at = models.DateTimeField(auto_now=True)
 

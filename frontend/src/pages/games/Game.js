@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Badge, OverlayTrigger, Tooltip, Button } from "react-bootstrap";
+import { Card, Badge, OverlayTrigger, Tooltip, Button} from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import Avatar from "../../components/Avatar";
 import styles from "../../styles/Game.module.css";
@@ -22,26 +22,11 @@ const Game = ({
   comments_count,
   genre,
   setGames,
-
 }) => {
   const currentUser = useCurrentUser();
   const isOwner = currentUser && currentUser.username === owner;
   const history = useHistory();
 
-  const handleRequestToRent = async () => {
-    try {
-      if (!currentUser) {
-        history.push('/signin'); 
-      } else {
-        const { data } = await axiosRes.post('/rentals/', { game: id });
-        alert('Rental request sent successfully!');
-      }
-    } catch (err) {
-      console.error(err);
-      alert('Failed to send rental request.');
-    }
-  };
-  
 
   const handleDelete = async () => {
     try {
@@ -57,35 +42,33 @@ const Game = ({
       const { data } = await axiosRes.post('/likes/', { game: id });
       setGames(prevGames => ({
         ...prevGames,
-        results: prevGames.results.map((game) => {
-          return game.id === id
-            ? { ...game, likes_count: game.likes_count + 1, like_id: data.id }
-            : game;
-        }),
+        results: prevGames.results.map((game) => (
+          game.id === id ? { ...game, likes_count: game.likes_count + 1, like_id: data.id } : game
+        )),
       }));
     } catch (err) {
       console.log(err);
     }
   };
-  
 
   const handleUnlike = async () => {
     try {
       await axiosRes.delete(`/likes/${like_id}/`);
       setGames(prevGames => ({
         ...prevGames,
-        results: prevGames.results.map(game =>
-          game.id === id
-            ? { ...game, likes_count: game.likes_count - 1, like_id: null }
-            : game
-        )
+        results: prevGames.results.map(game => (
+          game.id === id ? { ...game, likes_count: game.likes_count - 1, like_id: null } : game
+        )),
       }));
     } catch (err) {
       console.log(err);
     }
   };
-  
 
+
+  const handleRequestToRent = async () => {
+    history.push("/rentals", { gameTitle: title });
+  };
 
   return (
     <Card className={styles.Game}>
@@ -119,31 +102,33 @@ const Game = ({
             <Link to={`/games/${id}/edit`} className="btn btn-warning mt-2">
               Edit Game
             </Link>
-            <button className="btn btn-danger mt-2 ml-2"
-             onClick={handleDelete}>
+            <button className="btn btn-danger mt-2 ml-2" onClick={handleDelete}>
               Delete Game
             </button>
           </div>
         )}
         {!isOwner && (
-          <OverlayTrigger
-            placement="top"
-            overlay={
-              <Tooltip id="request-to-rent-tooltip">
-                {currentUser ? "Request to rent this game" : "Log in to request to rent!"}
-              </Tooltip>
-            }
-          >
-            <Button
-              className={btnStyles.Button}
-              onClick={handleRequestToRent}
-              style={{ fontSize: '10px' }}
+          <>
+            <OverlayTrigger
+              placement="top"
+              overlay={
+                <Tooltip id="request-to-rent-tooltip">
+                  {currentUser ? "Request to rent this game" : "Log in to request to rent!"}
+                </Tooltip>
+              }
             >
-              <i className="fa-solid fa-hand"></i> Request to Rent
-            </Button>
-          </OverlayTrigger>
+              <Button
+                className={btnStyles.Button}
+                style={{ fontSize: '10px' }}
+                onClick={handleRequestToRent}
+              >
+                <i className="fa-solid fa-hand"></i> Request to Rent
+              </Button>
+            </OverlayTrigger>
+          </>
         )}
-      {isOwner ? (
+        <Card.Body>
+          {isOwner ? (
             <OverlayTrigger
               placement="top"
               overlay={<Tooltip>You can't like your own game!</Tooltip>}
@@ -171,10 +156,10 @@ const Game = ({
             <i className="far fa-comments" />
           </Link>
           {comments_count}
+        </Card.Body>
       </Card.Body>
     </Card>
   );
 };
 
 export default Game;
-

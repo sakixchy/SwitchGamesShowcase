@@ -97,11 +97,11 @@ INSTALLED_APPS = [
     'corsheaders',
 
     'games',
-    'rentals',
     'profiles',
     'comments',
     'likes',
     'follower',
+    'reviews',   
 ]
 SITE_ID = 1
 MIDDLEWARE = [
