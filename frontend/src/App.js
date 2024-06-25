@@ -10,8 +10,8 @@ import GamePage from './pages/games/GamePage';
 import GamesPage from './pages/games/GamesPage';
 import GameEditForm from './pages/games/GameEditForm';
 import ProfilePage from './pages/profiles/ProfilePage';
-import RentalsPage from './pages/rentals/RentalsPage';
-import RentalPage from './pages/rentals/RentalPage';
+import ReviewCreateForm from './pages/reviews/ReviewCreateForm';
+import ReviewsPage from './pages/reviews/ReviewsPage';
 
 
 
@@ -31,8 +31,8 @@ function App() {
               <Route exact path="/games/create" render={()=> <GameCreateForm />} />
               <Route exact path="/games/:id" render={()=> <GamePage/> } />
               <Route exact path="/games/:id/edit" render={()=> <GameEditForm/> } />
-              <Route exact path="/rentals" render={()=> <RentalsPage />} />
-              <Route exact path="/rentals/:id" render={()=> <RentalPage />} />
+              <Route exact path="/reviews/create" render={()=> <ReviewCreateForm />} />
+              <Route exact path="/reviews/" render={()=> <ReviewsPage />} />
               <Route exact path="/profiles/:id" render={()=> <ProfilePage />} />
               <Route render={()=> <p>Page not found!</p>} />
             </Switch>

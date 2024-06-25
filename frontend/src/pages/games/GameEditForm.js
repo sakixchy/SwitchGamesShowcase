@@ -21,11 +21,10 @@ function GameEditForm() {
   const [postData, setPostData] = useState({
     title: "",
     description: "",
-    is_available: false,
     cover_image: "",
     genre: "",
   });
-  const { title, description, is_available, cover_image, genre } = postData;
+  const { title, description, cover_image, genre } = postData;
 
   const imageInput = useRef(null);
   const history = useHistory();
@@ -35,9 +34,9 @@ function GameEditForm() {
     const handleMount = async () => {
         try {
           const {data} = await axiosReq.get(`/games/${id}/`)
-          const {title, description, cover_image, is_available, genre, owner} = data;
+          const {title, description, cover_image, genre, owner} = data;
 
-          owner ? setPostData({title, description, cover_image, is_available, genre}) : history.push('/')
+          owner ? setPostData({title, description, cover_image, genre}) : history.push('/')
         } catch(err) {
 
         }
@@ -68,7 +67,6 @@ function GameEditForm() {
 
     formData.append("title", title);
     formData.append("description", description);
-    formData.append("is_available", is_available);
     formData.append("genre", genre);
 
     if (imageInput?.current?.files[0]) {
@@ -150,20 +148,6 @@ function GameEditForm() {
           {message}
         </Alert>
       ))}
-      <Form.Group controlId="is_available">
-      <Form.Check
-        type="checkbox"
-        name="is_available"
-        label="Is Available"
-        checked={is_available}
-        onChange={() => {
-            setPostData(prevState => ({
-            ...prevState,
-            is_available: !prevState.is_available}));
-     }}
-/>
-      </Form.Group>
-
       <Button
         className={`${btnStyles.Button} ${btnStyles.Blue}`}
         onClick={() => history.goBack()}

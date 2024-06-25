@@ -1,17 +1,23 @@
 from rest_framework import serializers
 from .models import Review
 from games.models import Game
-from django.contrib.auth.models import User
 
 class ReviewSerializer(serializers.ModelSerializer):
-    reviewer_username = serializers.ReadOnlyField(source='user.username')
-    reviewer_profile_image = serializers.ReadOnlyField(source='user.profile.image.url')
+    username = serializers.ReadOnlyField(source='user.username')
+    user_id = serializers.ReadOnlyField(source='user.id')
     game_title = serializers.ReadOnlyField(source='game.title')
-    game_cover_image = serializers.ReadOnlyField(source='game.cover_image.url')
+    game_genre = serializers.ReadOnlyField(source='game.genre')
+    game_cover_image = serializers.ImageField(source='game.cover_image', read_only=True)
+    profile_image = serializers.ImageField(source='user.profile.image', read_only=True)
+    rating_display = serializers.SerializerMethodField()
+
+    def get_rating_display(self, obj):
+        return obj.get_rating_display()
 
     class Meta:
         model = Review
-        fields = ('id', 'reviewer_username',
-         'reviewer_profile_image', 'game_title', 'game_cover_image',
-        'title', 'content', 'rating', 'created_at', 
-        )
+        fields = [
+            'id', 'game','game_title', 'game_genre', 'game_cover_image',
+            'username', 'user_id','title', 'content', 'rating',
+            'created_at', 'updated_at', 'rating_display', 'profile_image'
+        ]

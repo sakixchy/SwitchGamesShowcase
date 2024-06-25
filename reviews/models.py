@@ -23,4 +23,4 @@ class Review(models.Model):
         ordering = ['-created_at']
 
     def __str__(self):
-        return f'{self.user.username}\'s Review for {self.game.name}'
+        return f'{self.user.username}\'s Review for {self.game.title}'

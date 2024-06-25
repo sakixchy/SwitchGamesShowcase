@@ -20,11 +20,10 @@ function GameCreateForm() {
   const [postData, setPostData] = useState({
     title: "",
     description: "",
-    is_available: false,
     cover_image: "",
     genre:"",
   });
-  const { title, description, is_available, cover_image, genre } = postData;
+  const { title, description, cover_image, genre } = postData;
 
   const imageInput = useRef(null);
   const history = useHistory();
@@ -52,7 +51,6 @@ function GameCreateForm() {
       const formData = new FormData();
       formData.append("title", title);
       formData.append("description", description);
-      formData.append("is_available", is_available);
       formData.append("cover_image", imageInput.current.files[0]);
       formData.append("genre", genre )
 
@@ -129,21 +127,6 @@ function GameCreateForm() {
           {message}
         </Alert>
       ))}
-     <Form.Group controlId="is_available">
-          <Form.Check
-        type="checkbox"
-        name="is_available"
-        label="Is Available"
-        checked={is_available}
-        onChange={() => {
-          setPostData(prevState => ({
-            ...prevState,
-            is_available: !prevState.is_available
-          }));
-        }}
-     />
-      </Form.Group>
-
       <Button
         className={`${btnStyles.Button} ${btnStyles.Blue}`}
         onClick={() => history.goBack()}

@@ -32,7 +32,7 @@ const NavBar = () => {
     <NavLink
       className={styles.NavLink}
       activeClassName={styles.Active}
-      to="/rentals"><i className="fa-solid fa-clock"></i>Rentals</NavLink>
+      to="/reviews"><i class="fa-solid fa-star"></i>Reviews</NavLink>
     <NavLink
       exact
       className={styles.NavLink} 

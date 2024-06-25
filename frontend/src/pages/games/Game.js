@@ -1,9 +1,8 @@
 import React from "react";
-import { Card, Badge, OverlayTrigger, Tooltip, Button} from "react-bootstrap";
+import { Card, Badge, OverlayTrigger, Tooltip} from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import Avatar from "../../components/Avatar";
 import styles from "../../styles/Game.module.css";
-import btnStyles from "../../styles/Button.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContexts";
 import { axiosRes } from "../../api/axiosDefaults";
 
@@ -15,7 +14,6 @@ const Game = ({
   title,
   description,
   cover_image,
-  is_available,
   updated_at,
   like_id,
   likes_count,
@@ -66,10 +64,6 @@ const Game = ({
   };
 
 
-  const handleRequestToRent = async () => {
-    history.push("/rentals", { gameTitle: title });
-  };
-
   return (
     <Card className={styles.Game}>
       <Card.Body>
@@ -90,13 +84,6 @@ const Game = ({
         {title && <Card.Title className={styles.Title}>{title}</Card.Title>}
         {genre && <Badge className="ml-2" variant="info">{genre}</Badge>}
         {description && <Card.Text className={styles.Description}>{description}</Card.Text>}
-        <div className={styles.Availability}>
-          {is_available ? (
-            <Badge variant="success">Available</Badge>
-          ) : (
-            <Badge variant="secondary">Rented</Badge>
-          )}
-        </div>
         {isOwner && (
           <div>
             <Link to={`/games/${id}/edit`} className="btn btn-warning mt-2">
@@ -106,26 +93,6 @@ const Game = ({
               Delete Game
             </button>
           </div>
-        )}
-        {!isOwner && (
-          <>
-            <OverlayTrigger
-              placement="top"
-              overlay={
-                <Tooltip id="request-to-rent-tooltip">
-                  {currentUser ? "Request to rent this game" : "Log in to request to rent!"}
-                </Tooltip>
-              }
-            >
-              <Button
-                className={btnStyles.Button}
-                style={{ fontSize: '10px' }}
-                onClick={handleRequestToRent}
-              >
-                <i className="fa-solid fa-hand"></i> Request to Rent
-              </Button>
-            </OverlayTrigger>
-          </>
         )}
         <Card.Body>
           {isOwner ? (
