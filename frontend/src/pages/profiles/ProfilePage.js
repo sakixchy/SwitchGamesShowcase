@@ -16,6 +16,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
 import NoResults from "../../assets/images/luigi-no-results.png";
 import Game from "../games/Game";
+import { ProfileEditDropdown } from "../../components/MoreDropdown";
 
 
 
@@ -54,6 +55,7 @@ function ProfilePage() {
   const mainProfile = (
     <>
       <Row noGutters className="px-3 text-center">
+      {profile?.is_owner && <ProfileEditDropdown id={profile?.id} />}
         <Col lg={3} className="text-lg-left">
           <Image
             className={styles.ProfileImage}
@@ -78,6 +80,7 @@ function ProfilePage() {
               <div>following</div>
             </Col>
           </Row>
+          <div className="mt-3">{profile?.bio}</div>
         </Col>
         <Col lg={3} className="text-lg-right">
           {currentUser &&

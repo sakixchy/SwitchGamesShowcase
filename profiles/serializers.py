@@ -12,10 +12,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     games_count = serializers.ReadOnlyField()
     followers_count = serializers.ReadOnlyField()
     following_count = serializers.ReadOnlyField()
-    wishlist = GameSerializer(many=True, read_only=True)
  
-
-     
 
     def get_is_owner(self, obj):
         request = self.context['request']
@@ -38,7 +35,7 @@ class ProfileSerializer(serializers.ModelSerializer):
             'id', 'owner', 'name', 'bio', 'image',
             'created_at','updated_at', 'is_owner',
             'following_id','games_count', 'followers_count',
-            'following_count', 'wishlist',
+            'following_count', 
           
         ]
 

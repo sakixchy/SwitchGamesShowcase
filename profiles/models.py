@@ -7,7 +7,7 @@ from games.models import Game
 class Profile(models.Model):
 
   owner = models.OneToOneField(User, on_delete=models.CASCADE)
-  name = models.CharField(max_length=255)
+  name = models.CharField(max_length=255, blank=True)
   bio = models.TextField(blank=True)
   image = models.ImageField(
     upload_to='images/',

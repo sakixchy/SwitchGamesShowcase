@@ -5,6 +5,7 @@ import Avatar from "../../components/Avatar";
 import styles from "../../styles/Game.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContexts";
 import { axiosRes } from "../../api/axiosDefaults";
+import { MoreDropdown } from "../../components/MoreDropdown";
 
 const Game = ({
   id,
@@ -33,6 +34,10 @@ const Game = ({
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const handleEdit = () => {
+    history.push(`/games/${id}/edit`);
   };
 
   const handleLike = async () => {
@@ -73,6 +78,14 @@ const Game = ({
             <div className="ml-2">{owner}</div>
           </Link>
           <span>{new Date(updated_at).toLocaleDateString()}</span>
+          {isOwner && (
+          <div>
+           <MoreDropdown
+                handleEdit={handleEdit}
+                handleDelete={handleDelete}
+              />
+          </div>
+        )}
         </div>
       </Card.Body>
       <Link to={`/games/${id}`}>
@@ -84,16 +97,6 @@ const Game = ({
         {title && <Card.Title className={styles.Title}>{title}</Card.Title>}
         {genre && <Badge className="ml-2" variant="info">{genre}</Badge>}
         {description && <Card.Text className={styles.Description}>{description}</Card.Text>}
-        {isOwner && (
-          <div>
-            <Link to={`/games/${id}/edit`} className="btn btn-warning mt-2">
-              Edit Game
-            </Link>
-            <button className="btn btn-danger mt-2 ml-2" onClick={handleDelete}>
-              Delete Game
-            </button>
-          </div>
-        )}
         <Card.Body>
           {isOwner ? (
             <OverlayTrigger

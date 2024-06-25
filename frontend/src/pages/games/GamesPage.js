@@ -21,6 +21,7 @@ function GamesPage({ message, filter = "" }) {
   const { pathname } = useLocation();
   const [query, setQuery] = useState("");
 
+
   useEffect(() => {
     const fetchGames = async () => {
       try {
@@ -41,6 +42,8 @@ function GamesPage({ message, filter = "" }) {
       clearTimeout(timer);
     };
   }, [filter, query, pathname]);
+
+
 
   return (
     <Row className="h-100">
