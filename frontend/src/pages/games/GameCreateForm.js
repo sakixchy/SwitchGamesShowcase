@@ -13,9 +13,11 @@ import styles from "../../styles/GameCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import Asset from "../../components/Asset";
+import { useRedirect } from "../../hooks/useRedirect";
 
 
 function GameCreateForm() {
+  useRedirect('loggedOut')
   const [errors, setErrors] = useState({});
   const [postData, setPostData] = useState({
     title: "",

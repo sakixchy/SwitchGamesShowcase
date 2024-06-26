@@ -5,8 +5,10 @@ import Container from "react-bootstrap/Container";
 import Alert from "react-bootstrap/Alert";
 import { useHistory } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults"; // Ensure the correct path to axiosDefaults
+import { useRedirect } from "../../hooks/useRedirect";
 
 function ReviewCreateForm() {
+  useRedirect('loggedOut')
   const [errors, setErrors] = useState({});
   const [postData, setPostData] = useState({
     game: "",
