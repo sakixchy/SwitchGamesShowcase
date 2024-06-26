@@ -29,7 +29,7 @@ function GamesPage({ message, filter = "" }) {
         setGames(data);
         setHasLoaded(true);
       } catch (error) {
-        console.error("Error fetching games:", error);
+      
       }
     };
 

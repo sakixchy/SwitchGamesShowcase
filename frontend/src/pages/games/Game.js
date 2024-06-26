@@ -32,7 +32,7 @@ const Game = ({
       await axiosRes.delete(`/games/${id}/`);
       history.goBack();
     } catch (err) {
-      console.log(err);
+    
     }
   };
 
@@ -50,7 +50,7 @@ const Game = ({
         )),
       }));
     } catch (err) {
-      console.log(err);
+      
     }
   };
 
@@ -64,7 +64,7 @@ const Game = ({
         )),
       }));
     } catch (err) {
-      console.log(err);
+   
     }
   };
 

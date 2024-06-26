@@ -18,7 +18,7 @@ function ReviewsPage() {
         const { data } = await axiosReq.get('/reviews/');
         setReviews(data.results);
       } catch (err) {
-        console.error(err);
+     
       } finally {
         setLoading(false);
       }

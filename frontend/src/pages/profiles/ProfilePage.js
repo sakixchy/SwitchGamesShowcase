@@ -45,7 +45,7 @@ function ProfilePage() {
         setProfileGames(profileGames);
         setHasLoaded(true);
       } catch (err) {
-        console.log(err);
+
       }
     };
     fetchData();

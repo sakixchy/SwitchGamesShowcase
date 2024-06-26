@@ -27,7 +27,7 @@ function ReviewCreateForm() {
         const { data } = await axiosReq.get('/games/');
         setGames(data.results);
       } catch (err) {
-        console.error(err);
+  
       }
     };
 
@@ -40,7 +40,7 @@ function ReviewCreateForm() {
       const { data } = await axiosReq.post('/reviews/', postData);
       history.push(`/reviews/${data.id}`);
     } catch (err) {
-      console.error(err);
+
       if (err.response?.status !== 401) {
         setErrors(err.response?.data);
       }

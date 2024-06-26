@@ -31,7 +31,7 @@ function GamePage() {
           setGame({ results: [game] });
           setComments(comments);
         } catch (err) {
-          console.log(err);
+       
         }
       };
     
