@@ -16,6 +16,7 @@ import UsernameForm from './pages/profiles/UsernameForm';
 import UserPasswordForm from "./pages/profiles/UserPasswordForm";
 import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 import NotFound from './components/NotFound';
+import ReviewPage from './pages/reviews/ReviewPage';
 
 
 
@@ -38,6 +39,7 @@ function App() {
               <Route exact path="/games/:id/edit" render={()=> <GameEditForm/> } />
               <Route exact path="/reviews/create" render={()=> <ReviewCreateForm />} />
               <Route exact path="/reviews/" render={()=> <ReviewsPage />} />
+              <Route exact path="/reviews/:id" render={()=> <ReviewPage />} />
               <Route exact path="/profiles/:id" render={()=> <ProfilePage />} />
               <Route exact path="/profiles/:id/edit/username" render={()=> <UsernameForm />} />
               <Route exact path="/profiles/:id/edit/password" render={()=> <UserPasswordForm />} />

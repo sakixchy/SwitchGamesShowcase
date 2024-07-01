@@ -12,7 +12,7 @@ class Review(models.Model):
     ]
 
     game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name='reviews')
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     content = models.TextField()
     rating = models.IntegerField(choices=RATING_CHOICES)
@@ -23,4 +23,4 @@ class Review(models.Model):
         ordering = ['-created_at']
 
     def __str__(self):
-        return f'{self.user.username}\'s Review for {self.game.title}'
+        return f'{self.owner.username}\'s Review for {self.game.title}'

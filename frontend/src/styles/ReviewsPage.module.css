@@ -29,3 +29,20 @@
   .reviewcreate:focus {
     color: red;
   }
+
+
+  .reviewItem {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  
+  .reviewItem:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .reviewLink {
+    text-decoration: none;
+    color: inherit; /* Inherit text color from parent */
+  }

@@ -12,7 +12,7 @@ class ReviewList(generics.ListCreateAPIView):
     filterset_fields = ['game']  
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        serializer.save(owner=self.request.user)
 
 class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ReviewSerializer

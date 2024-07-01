@@ -6,6 +6,7 @@ import styles from "../../styles/Game.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContexts";
 import { axiosRes } from "../../api/axiosDefaults";
 import { MoreDropdown } from "../../components/MoreDropdown";
+import moment from 'moment';
 
 const Game = ({
   id,
@@ -30,7 +31,7 @@ const Game = ({
   const handleDelete = async () => {
     try {
       await axiosRes.delete(`/games/${id}/`);
-      history.goBack();
+      history.push('/');
     } catch (err) {
     
     }
@@ -77,7 +78,7 @@ const Game = ({
             <Avatar src={profile_image} height={55} className={styles.Avatar} />
             <div className="ml-2">{owner}</div>
           </Link>
-          <span>{new Date(updated_at).toLocaleDateString()}</span>
+          <span>{moment(updated_at).fromNow()}</span> 
           {isOwner && (
           <div>
            <MoreDropdown

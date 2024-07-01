@@ -6,6 +6,7 @@ import styles from "../../styles/Comment.module.css";
 import { axiosRes } from "../../api/axiosDefaults";
 import { useCurrentUser } from "../../contexts/CurrentUserContexts";
 import CommentEditForm from "./CommentEditForm";
+import moment from 'moment';
 
 const Comment = (props) => {
   const {
@@ -18,6 +19,7 @@ const Comment = (props) => {
     setGame,
     setComments,
   } = props;
+
 
   const handleDelete = async () => {
     try {
@@ -53,9 +55,7 @@ const Comment = (props) => {
         <Media.Body className="align-self-center ml-2">
           <div className={styles.CommentHeader}>
             <span className={styles.Owner}>{owner}</span>
-            <span className={styles.Date}>
-              {new Date(updated_at).toLocaleDateString()}
-            </span>
+            <span>{moment(updated_at).fromNow()}</span> 
           </div>
           {showEditForm ? (
             <CommentEditForm

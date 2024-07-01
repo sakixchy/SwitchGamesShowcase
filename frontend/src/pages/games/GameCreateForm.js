@@ -152,7 +152,7 @@ function GameCreateForm() {
               {cover_image ? (
                 <>
                   <figure>
-                    <Image className={appStyles.Image} src={cover_image} rounded />
+                    <Image style={{ maxWidth: 400}} className={appStyles.Image} src={cover_image} rounded />
                   </figure>
                   <div>
                     <Form.Label

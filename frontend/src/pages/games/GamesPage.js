@@ -13,6 +13,7 @@ import NoResults from "../../assets/images/luigi-no-results.png";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
 import PopularProfiles from "../profiles/PopularProfiles";
+import { useCurrentUser } from "../../contexts/CurrentUserContexts";
 
 
 function GamesPage({ message, filter = "" }) {
@@ -20,6 +21,8 @@ function GamesPage({ message, filter = "" }) {
   const [hasLoaded, setHasLoaded] = useState(false);
   const { pathname } = useLocation();
   const [query, setQuery] = useState("");
+
+  const currentUser = useCurrentUser();
 
 
   useEffect(() => {
@@ -41,7 +44,7 @@ function GamesPage({ message, filter = "" }) {
     return () => {
       clearTimeout(timer);
     };
-  }, [filter, query, pathname]);
+  }, [filter, query, pathname, currentUser]);
 
 
 
