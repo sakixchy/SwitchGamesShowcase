@@ -23,21 +23,49 @@ Below you'll find all the images of wireframes: <br>
     <summary>
         Desktop Wireframes
     </summary>
-    <img src="readme/assets/wireframes/desktop-wireframes/home-desktop.png" alt="Desktop Wireframes Mockup">
-    <img src="readme/assets/wireframes/desktop-wireframes/games-desktop.png" alt="Desktop Wireframes Mockup">
-    <img src="readme/assets/wireframes/desktop-wireframes/reviews-desktop.png" alt="Desktop Wireframes Mockup">
-    <img src="readme/assets/wireframes/desktop-wireframes/signin-desktop.png" alt="Desktop Wireframes Mockup">
-    <img src="readme/assets/wireframes/desktop-wireframes/signup-desktop.png" alt="Desktop Wireframes Mockup">
-    <img src="readme/assets/wireframes/desktop-wireframes/profile-desktop.png" alt="Desktop Wireframes Mockup">
+    <img src="readme/assets/wireframes/home-desktop.png" alt="Desktop Wireframes Mockup">
+    <img src="readme/assets/wireframes/games-desktop.png" alt="Desktop Wireframes Mockup">
+    <img src="readme/assets/wireframes/game-detail-desktop.png" alt="Desktop Wireframes Mockup">
+    <img src="readme/assets/wireframes/reviews-desktop.png" alt="Desktop Wireframes Mockup">
+    <img src="readme/assets/wireframes/signin-desktop.png" alt="Desktop Wireframes Mockup">
+    <img src="readme/assets/wireframes/signup-desktop.png" alt="Desktop Wireframes Mockup">
+    <img src="readme/assets/wireframes/profile-desktop.png" alt="Desktop Wireframes Mockup">
 </details>
 <details>
     <summary>
         Mobile Wireframes
     </summary>
-    <img src="readme/assets/wireframes/mobile-wireframes/home-mobile.png" alt="Mobile Wireframes Mockup">
-    <img src="readme/assets/wireframes/mobile-wireframes/games-mobile.png" alt="Mobile Wireframes Mockup">
-    <img src="readme/assets/wireframes/mobile-wireframes/reviews-mobile.png" alt="Mobile Wireframes Mockup">
+    <img src="readme/assets/wireframes/home-mobile.png" alt="Mobile Wireframes Mockup">
+    <img src="readme/assets/wireframes/games-mobile.png" alt="Mobile Wireframes Mockup">
+    <img src="readme/assets/wireframes/game-detail-mobile.png" alt="Mobile Wireframes Mockup">
+    <img src="readme/assets/wireframes/reviews-mobile.png" alt="Mobile Wireframes Mockup">
     <img src="readme/assets/wireframes/mobile-wireframes/signin-mobile.png" alt="Mobile Wireframes Mockup">
     <img src="readme/assets/wireframes/mobile-wireframes/signup-mobile.png" alt="Mobile Wireframes Mockup">
     <img src="readme/assets/wireframes/mobile-wireframes/profile-mobile.png" alt="Mobile Wireframes Mockup">
 </details>
+
+### Site Goals
+Switch Games Showcase aims to be the ultimate platofrm for Nintendo gamers to explore, review, and engage with their favorite games. By offering a robust set of features:
+
+- **Connect Gamers**: Foster a community where Nintendo Switch enthusiasts can share their thoughts, reviews, and experiences.
+- **Enhance Discovery**: Provide users with tools to discover new games and learn about them through community-driven content.
+- **Facilitate Engagement**: Enable users to interact with each other through reviews, comments, and likes, creating a vibrant and dynamic platform.
+- **Provide Insights**: Offer in-depth reviews and ratings to help users make informed decisions about which games to play.
+
+### Structure 
+#### Home 
+- **Game Feed**: Displays a vertical stack of game posts, allowing users to see brief information about each game, including title, cover image, genre, like and commend counts, and a short description. Each post is designed to be informative and visually appealing to encourage exploration and engagement.
+
+- **Search Bar**: Positioned prominently, the search bar enables users to quickly and easily find specific games or discover new ones based on keywords or filters. This feature enhances user convenience by providing instant access to a wide array of games.
+
+- **Followed Users Section**: This section highlights users that being followed most, making it easy to keep up with their game posts and reviews. It fosters community interaction by encouraging users to connect with other gamers.
+
+##### User Goal
+- Browse a curated feed of Nintendo Switch games shared by the community.
+- Quickly search for and find games using the search bar.
+- Follow other users and keep up with their latest posts and reviews.
+
+###### Website Goal
+- Provide a dynamic and engaging experience that encourages exploration of new and popular games.
+- Facilitate community interaction and engagement through easy-to-use features.
+- Ensure that users can quickly access the most relevant and interesting content.
