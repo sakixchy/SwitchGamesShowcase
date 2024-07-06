@@ -138,6 +138,89 @@ The font was carefully selected to emulate the original Nintendo Mario Kart 7 fo
  Images on the site primarily include user-selected content such as avatars and game covers, which allow users to personalize their profiles and game listings, fostering a sense of community and engagement. There is a nintendo franchise family hero image  with all beloved characters. Additionally, a prominent "Nintendo Franchise Family" hero image featuring beloved characters from various Nintendo games is included to create an immediate connection to the Nintendo brand and evoke nostalgia among visitors.
 
 ___
+## Features
+### Existing Features
+#### Navbar
+The navbar has a logo which links to th ehome page, and other pages which are dynamic based on user authenitcation. The navbar is designed to work across all screen sizes givng a different layout respectively.
+<details>
+    <summary>
+        Desktop Navbar
+    </summary>
+    <img src="readme/assets/features/navbar-feature-desktop.png" alt="Navbar Feature not logged in">
+    <img src="readme/assets/features/navbar-feature-desktop-alt.png" alt="Navbar Feature logged in">
+</details>
+<details>
+    <summary>
+        Mobile Navbar
+    </summary>
+    <img src="readme/assets/features/navbar-feature-mobile.png" alt="Navbar Feature not logged in mobile">
+    <img src="readme/assets/features/navbar-feature-mobile-alt.png" alt="Navbar Feature logged in mobile">
+</details>
+
+#### Search Bar
+The home page features a prominently placed search bar at the top of the game feed, providing usersbto quickly and easily find specific games. This feature is designed to enhance the user experience by allowing efficient navigation through the extensive game library available on the site.<br>
+![search bar feature](readme/assets/features/searchbar-feature.png)
+
+#### Game Feed
+The posted games are shown in an vertical stacked format with recent ones being at the top allowing users to browse through extensive game libraries and find games of interest. They also see an overview of game information along with community engagements.<br>
+![game feed feature](readme/assets/features/gamefeed-feature.png)
+
+#### Game Detail
+The Game Detail Page provides an in-depth view of each game, allowing users to explore individual game entries and interact with them through comments and owner of the game to either edit or delete them.<br>
+![game detail feature](readme/assets/features/game-detail-feature.png)
+
+#### Edit / Delete
+The game owner can choose to edit or delete it from the database with intuitive dropdown menu.
+![edit & delete feature](readme/assets/features/editanddelete-feature.png)
+
+#### Like/Unlike & Comment
+Authenticated users can like or unlike a game and leave comments, fostering community engagement.
+![like/unlike feature](readme/assets/features/likeunlike-feature.png) <br>
+![comment feature](readme/assets/features/comment-feature.png) <br>
+
+#### Game Edit
+Game owners can edit their game information and update it as desired.
+![game edit feature](readme/assets/features/editgame-feature.png)
+
+#### Game Creation
+Users can create a new game instance with appropriate details to share with the community.
+![game create feature](readme/assets/features/creategame-feature.png)
+
+#### Review Creation
+Users can write reviews for games available on the platform, offering their opinions and feedback.
+![review create feature](readme/assets/features/createreview-feature.png)
+
+#### Review List
+Visitors can view a list of game reviews on the platform and read through them.
+![review list feature](readme/assets/features/reviewlist-feature.png)
+
+#### Review Detail
+Visitors can view each review in-depth by clicking on the card providing a rich user experience.
+![review detail feature](readme/assets/features/reviewdetail-feature.png)
+
+#### Profile
+Users can easily follow or unfollow profiles with a single click. The follower count will automatically update to reflect any changes. Each profile section showcases the owner's name, a brief bio, and a comprehensive list of all the games they have created.
+![profile feature](readme/assets/features/profile-feature.png)
+
+#### Edit Profile
+Users have the ability to update their profile withthe following options: <br>
+Name, Password, Bio and Avatar <br>
+![edit profile feature](readme/assets/features/editprofile-feature.png)
+![edit profile alt feature](readme/assets/features/changeusername-feature.png) <br>
+![edit profile alt feature](readme/assets/features/passwordchange-feature.png)
+
+### Future Features
+1. **Filter Games by Genre** <br>
+Feature Description: Introduce a filtering system that allows users to search for games based on their genre. <br>
+User Benefit: Users will be able to quickly find games that match their interests, making the browsing experience more personalized and efficient.
+
+2. **Follower Feed Extensive** <br>
+Feature Description: Add and expand the follower feed to include more comprehensive updates and interactions.
+User Benefit: Followers can stay updated on all activities, content, and interactions of the profiles they follow, creating a more engaging experience.
+
+3. **Rental Sytem** <br>
+Feature Description: Implement a rental system that allows users to rent games from their respective owners using a calendar function to manage rental periods.
+___
 
 
 
