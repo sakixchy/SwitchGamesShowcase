@@ -215,12 +215,193 @@ Feature Description: Introduce a filtering system that allows users to search fo
 User Benefit: Users will be able to quickly find games that match their interests, making the browsing experience more personalized and efficient.
 
 2. **Follower Feed Extensive** <br>
-Feature Description: Add and expand the follower feed to include more comprehensive updates and interactions.
+Feature Description: Add and expand the follower feed to include more comprehensive updates and interactions. <br>
 User Benefit: Followers can stay updated on all activities, content, and interactions of the profiles they follow, creating a more engaging experience.
 
 3. **Rental Sytem** <br>
 Feature Description: Implement a rental system that allows users to rent games from their respective owners using a calendar function to manage rental periods.
 ___
+## Database Design 
+### Database (ERD) Table
+The table was made using a website called draw.io from [here](https://app.diagrams.net/) <br>
+![ERD of Databse ](readme/assets/database-erd.png)
 
+### CRUD 
+The CRUD functionality is integrated into both game and profile entities. These operations form the backbone of the platform, providing users with full control over their data, including the ability to create, read, update, and delete games , create and reviews, and profile information.
 
+### API Endpoints
+                                                                                                    
+<table border="3" cellspacing="0" cellpadding="5">
+  <tr>
+    <th>Operation</th>
+    <th>Endpoint</th>
+    <th>HTTP Method</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>Review List</td>
+    <td>/api/reviews</td>
+    <td>GET</td>
+    <td>Retrieve a list of all reviews.</td>
+  </tr>
+  <tr>
+    <td>Review Detail</td>
+    <td>/api/reviews/{id}</td>
+    <td>GET</td>
+    <td>Retrieve details of a specific review.</td>
+  </tr>
+  <tr>
+  <td>Review Create</td>
+  <td>/api/reviews</td>
+  <td>POST</td>
+  <td>Create a new review.</td>
+  </tr>
+  <tr>
+    <td>Review Delete</td>
+    <td>/api/reviews/{id}</td>
+    <td>DELETE</td>
+    <td>Delete a specific review by ID.</td>
+  </tr>
+  <tr>
+    <td>Game List</td>
+    <td>/api/games</td>
+    <td>GET</td>
+    <td>Retrieve a list of all games.</td>
+  </tr>
+  <tr>
+    <td>Game Detail</td>
+    <td>/api/games/{id}</td>
+    <td>GET</td>
+    <td>Retrieve details of a specific game.</td>
+  </tr>
+  <tr>
+    <td>Game Edit</td>
+    <td>/api/games/{id}</td>
+    <td>PUT</td>
+    <td>Update details of a specific game.</td>
+  </tr>
+  <tr>
+    <td>Game Delete</td>
+    <td>/api/games/{id}</td>
+    <td>DELETE</td>
+    <td>Delete a specific game by ID.</td>
+  </tr>
+  <tr>
+    <td>Like Game</td>
+    <td>/api/games/{id}/like</td>
+    <td>POST</td>
+    <td>Like a specific game by ID.</td>
+  </tr>
+  <tr>
+    <td>Unlike Game</td>
+    <td>/api/games/{id}/like</td>
+    <td>DELETE</td>
+    <td>Unlike a specific game by ID.</td>
+  </tr>
+  <tr>
+    <td>Comment List</td>
+    <td>/api/games/{id}/comments</td>
+    <td>GET</td>
+    <td>Retrieve a list of comments for a game.</td>
+  </tr>
+  <tr>
+    <td>Comment Create</td>
+    <td>/api/games/{id}/comments</td>
+    <td>POST</td>
+    <td>Create a new comment under a specific game.</td>
+  </tr>
+  <tr>
+    <td>Comment Edit</td>
+    <td>/api/comments/{id}</td>
+    <td>PUT</td>
+    <td>Edit a specific comment by ID.</td>
+  </tr>
+  <tr>
+    <td>Comment Delete</td>
+    <td>/api/comments/{id}</td>
+    <td>DELETE</td>
+    <td>Delete a specific comment by ID.</td>
+  </tr>
+  <tr>
+    <td>Follower List</td>
+    <td>/api/users/{id}/followers</td>
+    <td>GET</td>
+    <td>Retrieve a list of followers for a user.</td>
+  </tr>
+  <tr>
+    <td>Following List</td>
+    <td>/api/users/{id}/following</td>
+    <td>GET</td>
+    <td>Retrieve a list of users a user follows.</td>
+  </tr>
+  <tr>
+    <td>Follow User</td>
+    <td>/api/users/{id}/follow</td>
+    <td>POST</td>
+    <td>Follow a specific user by ID.</td>
+  </tr>
+  <tr>
+    <td>Unfollow User</td>
+    <td>/api/users/{id}/unfollow</td>
+    <td>DELETE</td>
+    <td>Unfollow a specific user by ID.</td>
+  </tr>
+</table>
 
+## Technologies Used
+### Fundementals
+- Draw.io for Entity-Relation Diagram
+- Balsamiq for Wireframes
+- Cloudinary for storing images
+- Elephant SQL for storing data
+- Gitpod for Development
+- Heroku for Hosting App
+
+### Backend
+#### Frameworks and Libraries
+- Django
+- Django REST Framework
+- Django Rest Auth 
+- Django Allauth 
+- Django Cloudinary Storage 
+- Django CORS Headers 
+- Django Filter
+
+#### Security and Authentication
+- Django REST Framework SimpleJWT 
+- OAuthlib 
+- PyJWT
+
+#### Database
+- dj-database-url 
+- psycopg2
+- sqlparse 
+
+#### Deployment and Hosting
+- Gunicorn 
+- Whitenoise
+
+#### Image Processing
+- Pillow 
+
+### Frontend
+#### Core Libraries and Frameworks
+- React 
+- React Router DOM
+
+#### UI Components and Styling
+- React Bootstrap
+- React Infinite Scroll Component 
+
+#### Data Handling and State Management
+- Axios
+- JWT Decode 
+- Moment
+___
+## Testing 
+### Manual Testing
+The detailed manual testing including step-by-step instructions, test cases, expected outcomes, and pass/fail statuses, have been comprehensively documented in a separate file. This file includes all necessary details to understand the testing process and results. <br>
+
+Please refer to the [Manual Testing Documentation](TESTING.md) for a complete overview. <br>
+
+### Validator Testing
