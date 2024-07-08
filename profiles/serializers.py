@@ -12,13 +12,11 @@ class ProfileSerializer(serializers.ModelSerializer):
     games_count = serializers.ReadOnlyField()
     followers_count = serializers.ReadOnlyField()
     following_count = serializers.ReadOnlyField()
- 
 
     def get_is_owner(self, obj):
         request = self.context['request']
         return request.user == obj.owner
-    
-    
+
     def get_following_id(self, obj):
         user = self.context['request'].user
         if user.is_authenticated:
@@ -28,14 +26,11 @@ class ProfileSerializer(serializers.ModelSerializer):
             return following.id if following else None
         return None
 
-
     class Meta:
         model = Profile
         fields = [
             'id', 'owner', 'name', 'bio', 'image',
-            'created_at','updated_at', 'is_owner',
-            'following_id','games_count', 'followers_count',
-            'following_count', 
-          
+            'created_at', 'updated_at', 'is_owner',
+            'following_id', 'games_count', 'followers_count',
+            'following_count',
         ]
-

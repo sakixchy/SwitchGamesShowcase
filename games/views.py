@@ -9,7 +9,6 @@ from .serializers import GameSerializer
 from drf_api_sgr.permissions import IsOwnerOrReadOnly
 
 
-
 class GameList(generics.ListCreateAPIView):
     """
     List games or create a game if logged in.
@@ -46,7 +45,8 @@ class GameList(generics.ListCreateAPIView):
         return Response(serializer.data)
 
     def post(self, request):
-        serializer = GameSerializer(data=request.data, context={'request': request})
+        serializer = GameSerializer(data=request.data,
+                                    context={'request': request})
         if serializer.is_valid():
             serializer.save(owner=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -59,7 +59,7 @@ class GameDetail(APIView):
 
     def get_object(self, pk):
         try:
-        
+
             return Game.objects.annotate(
                 likes_count=Count('likes', distinct=True),
                 comments_count=Count('comment', distinct=True)
@@ -74,8 +74,9 @@ class GameDetail(APIView):
 
     def put(self, request, pk):
         game = self.get_object(pk)
-        self.check_object_permissions(request, game)  
-        serializer = GameSerializer(game, data=request.data, partial=True, context={'request': request})
+        self.check_object_permissions(request, game)
+        serializer = GameSerializer(game, data=request.data,
+                                    partial=True, context={'request': request})
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)

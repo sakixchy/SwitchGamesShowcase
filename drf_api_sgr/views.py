@@ -13,7 +13,7 @@ def root_route(request):
     })
 
 
-# Fix django-rest-auth logout issue 
+# Fix django-rest-auth logout issue
 @api_view(['POST'])
 def logout_route(request):
     response = Response()

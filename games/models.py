@@ -13,15 +13,15 @@ class Game(models.Model):
         ('classic', 'Classic'),
     ]
 
-    owner = models.ForeignKey(User, related_name='owned_games', on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, related_name='owned_games',
+                              on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     description = models.TextField()
     cover_image = models.ImageField(upload_to='game_covers/')
-    genre = models.CharField(max_length=20, choices=GENRE_CHOICES, default='adventure')
+    genre = models.CharField(max_length=20, choices=GENRE_CHOICES,
+                             default='adventure')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
-   
 
     class Meta:
         ordering = ['-created_at']

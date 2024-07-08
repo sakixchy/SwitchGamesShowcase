@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from games.models import Game
 
+
 class Review(models.Model):
     RATING_CHOICES = [
         (1, '1 - Awful'),
@@ -11,7 +12,8 @@ class Review(models.Model):
         (5, '5 - Excellent'),
     ]
 
-    game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name='reviews')
+    game = models.ForeignKey(Game, on_delete=models.CASCADE,
+                             related_name='reviews')
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     content = models.TextField()

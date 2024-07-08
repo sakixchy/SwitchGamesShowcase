@@ -405,3 +405,27 @@ The detailed manual testing including step-by-step instructions, test cases, exp
 Please refer to the [Manual Testing Documentation](TESTING.md) for a complete overview. <br>
 
 ### Validator Testing
+[Free Formatter](https://www.freeformatter.com/html-validator.html) was used to check for any errors or bad practices. <br>
+- Home 
+![home validator check](readme/assets/code-validatons/html-validation-success.png)
+- Games
+![games validator check](readme/assets/code-validatons/html-validation-success.png)
+- Game Detail
+![game detail validator check](readme/assets/code-validatons/html-validation-success.png)
+- Game Edit
+![game edit validator check](readme/assets/code-validatons/html-validation-success.png)
+- Reviews
+![reviews validator check](readme/assets/code-validatons/html-validation-success.png)
+- Review Detail
+![review detail validator check](readme/assets/code-validatons/html-validation-success.png)
+- Profile
+![profile validator check](readme/assets/code-validatons/html-validation-success.png)
+- Sign In
+![signin validator check](readme/assets/code-validatons/html-validation-success.png)
+- Sign Up
+![signup validator check](readme/assets/code-validatons/html-validation-success.png)
+
+- CSS Validator by [W3C Jigsaw](https://jigsaw.w3.org/css-validator/)
+All CSS code passed the Validator checks. <br>
+![css validation success](readme/assets/code-validatons/css-validation-success.png)
+

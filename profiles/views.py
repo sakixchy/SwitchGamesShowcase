@@ -6,9 +6,7 @@ from .models import Profile
 from .serializers import ProfileSerializer
 
 
-
 class ProfileList(generics.ListAPIView):
-  
     queryset = Profile.objects.annotate(
         games_count=Count('owner__owned_games', distinct=True),
         followers_count=Count('owner__followed', distinct=True),
@@ -31,8 +29,9 @@ class ProfileList(generics.ListAPIView):
         'owner__followed__created_at',
     ]
 
+
 class ProfileDetail(generics.RetrieveUpdateAPIView):
-   
+
     permission_classes = [IsOwnerOrReadOnly]
     queryset = Profile.objects.annotate(
         games_count=Count('owner__owned_games', distinct=True),
@@ -40,5 +39,3 @@ class ProfileDetail(generics.RetrieveUpdateAPIView):
         following_count=Count('owner__following', distinct=True)
     ).order_by('-created_at')
     serializer_class = ProfileSerializer
-
-    
