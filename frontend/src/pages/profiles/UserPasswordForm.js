@@ -1,56 +1,55 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react'
 
-import Alert from "react-bootstrap/Alert";
-import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Form from "react-bootstrap/Form";
+import Alert from 'react-bootstrap/Alert'
+import Button from 'react-bootstrap/Button'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Form from 'react-bootstrap/Form'
 
-import { useHistory, useParams } from "react-router-dom";
-import { axiosRes } from "../../api/axiosDefaults";
-import { useCurrentUser } from "../../contexts/CurrentUserContexts";
+import { useHistory, useParams } from 'react-router-dom'
+import { axiosRes } from '../../api/axiosDefaults'
+import { useCurrentUser } from '../../contexts/CurrentUserContexts'
 
-import btnStyles from "../../styles/Button.module.css";
-import appStyles from "../../App.module.css";
+import btnStyles from '../../styles/Button.module.css'
+import appStyles from '../../App.module.css'
 
 const UserPasswordForm = () => {
-  const history = useHistory();
-  const { id } = useParams();
-  const currentUser = useCurrentUser();
+  const history = useHistory()
+  const { id } = useParams()
+  const currentUser = useCurrentUser()
 
   const [userData, setUserData] = useState({
-    new_password1: "",
-    new_password2: "",
-  });
-  const { new_password1, new_password2 } = userData;
+    new_password1: '',
+    new_password2: ''
+  })
+  const { newPassword1, newPassword2 } = userData
 
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({})
 
   const handleChange = (event) => {
     setUserData({
       ...userData,
-      [event.target.name]: event.target.value,
-    });
-  };
+      [event.target.name]: event.target.value
+    })
+  }
 
   useEffect(() => {
     if (currentUser?.profile_id?.toString() !== id) {
       // redirect user if they are not the owner of this profile
-      history.push("/");
+      history.push('/')
     }
-  }, [currentUser, history, id]);
+  }, [currentUser, history, id])
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
     try {
-      await axiosRes.post("/dj-rest-auth/password/change/", userData);
-      history.goBack();
+      await axiosRes.post('/dj-rest-auth/password/change/', userData)
+      history.goBack()
     } catch (err) {
-
-      setErrors(err.response?.data);
+      setErrors(err.response?.data)
     }
-  };
+  }
 
   return (
     <Row>
@@ -62,7 +61,7 @@ const UserPasswordForm = () => {
               <Form.Control
                 placeholder="new password"
                 type="password"
-                value={new_password1}
+                value={newPassword1}
                 onChange={handleChange}
                 name="new_password1"
               />
@@ -77,7 +76,7 @@ const UserPasswordForm = () => {
               <Form.Control
                 placeholder="confirm new password"
                 type="password"
-                value={new_password2}
+                value={newPassword2}
                 onChange={handleChange}
                 name="new_password2"
               />
@@ -103,7 +102,7 @@ const UserPasswordForm = () => {
         </Container>
       </Col>
     </Row>
-  );
-};
+  )
+}
 
-export default UserPasswordForm;
+export default UserPasswordForm

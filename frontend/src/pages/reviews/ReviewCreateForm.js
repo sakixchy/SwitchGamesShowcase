@@ -1,66 +1,63 @@
-import React, { useState, useEffect } from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
-import Alert from "react-bootstrap/Alert";
-import { useHistory } from "react-router-dom";
-import { axiosReq } from "../../api/axiosDefaults"; 
-import { useRedirect } from "../../hooks/useRedirect";
+import React, { useState, useEffect } from 'react'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+import Container from 'react-bootstrap/Container'
+import Alert from 'react-bootstrap/Alert'
+import { useHistory } from 'react-router-dom'
+import { axiosReq } from '../../api/axiosDefaults'
+import { useRedirect } from '../../hooks/useRedirect'
 
-function ReviewCreateForm() {
+function ReviewCreateForm () {
   useRedirect('loggedOut')
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({})
   const [postData, setPostData] = useState({
-    game: "",
-    title: "",
-    content: "",
-    rating: 3,
-  });
-  const { game, title, content, rating } = postData;
+    game: '',
+    title: '',
+    content: '',
+    rating: 3
+  })
+  const { game, title, content, rating } = postData
 
-  const [games, setGames] = useState([]);
-  const history = useHistory();
+  const [games, setGames] = useState([])
+  const history = useHistory()
 
   useEffect(() => {
     const fetchGames = async () => {
       try {
-        const { data } = await axiosReq.get('/games/');
-        setGames(data.results);
-      } catch (err) {
-  
-      }
-    };
+        const { data } = await axiosReq.get('/games/')
+        setGames(data.results)
+      } catch (err) {}
+    }
 
-    fetchGames();
-  }, []);
+    fetchGames()
+  }, [])
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
     try {
-      const { data } = await axiosReq.post('/reviews/', postData);
-      history.push(`/reviews/${data.id}`);
+      const { data } = await axiosReq.post('/reviews/', postData)
+      history.push(`/reviews/${data.id}`)
     } catch (err) {
-
       if (err.response?.status !== 401) {
-        setErrors(err.response?.data);
+        setErrors(err.response?.data)
       }
     }
-  };
+  }
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
+    const { name, value } = event.target
     setPostData({
       ...postData,
-      [name]: value,
-    });
-  };
+      [name]: value
+    })
+  }
 
   const handleRatingChange = (event) => {
     setPostData({
       ...postData,
-      rating: parseInt(event.target.value),
-    });
-  };
+      rating: parseInt(event.target.value)
+    })
+  }
 
   return (
     <Container>
@@ -149,7 +146,7 @@ function ReviewCreateForm() {
         </Button>
       </Form>
     </Container>
-  );
+  )
 }
 
-export default ReviewCreateForm;
+export default ReviewCreateForm

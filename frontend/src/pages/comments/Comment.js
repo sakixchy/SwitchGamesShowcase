@@ -1,15 +1,12 @@
-import React, { useState } from "react";
-import { Button, Media } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import Avatar from "../../components/Avatar";
-import styles from "../../styles/Comment.module.css";
-import { axiosRes } from "../../api/axiosDefaults";
-import { useCurrentUser } from "../../contexts/CurrentUserContexts";
-import CommentEditForm from "./CommentEditForm";
-import dayjs from 'dayjs'; 
-import relativeTime from 'dayjs/plugin/relativeTime';
-
-dayjs.extend(relativeTime);
+import React, { useState } from 'react'
+import { Button, Media } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+import Avatar from '../../components/Avatar'
+import styles from '../../styles/Comment.module.css'
+import { axiosRes } from '../../api/axiosDefaults'
+import { useCurrentUser } from '../../contexts/CurrentUserContexts'
+import CommentEditForm from './CommentEditForm'
+import moment from 'moment'
 
 const Comment = (props) => {
   const {
@@ -20,33 +17,32 @@ const Comment = (props) => {
     content,
     id,
     setGame,
-    setComments,
-  } = props;
-
+    setComments
+  } = props
 
   const handleDelete = async () => {
     try {
-      await axiosRes.delete(`/comments/${id}/`);
+      await axiosRes.delete(`/comments/${id}/`)
       setGame((prevGame) => ({
         results: [
           {
             ...prevGame.results[0],
-            comments_count: prevGame.results[0].comments_count - 1,
-          },
-        ],
-      }));
+            comments_count: prevGame.results[0].comments_count - 1
+          }
+        ]
+      }))
       setComments((prevComments) => ({
         ...prevComments,
-        results: prevComments.results.filter((comment) => comment.id !== id),
-      }));
+        results: prevComments.results.filter((comment) => comment.id !== id)
+      }))
     } catch (err) {
-  
+      console.error('Error deleting comment:', err)
     }
-  };
+  }
 
-  const currentUser = useCurrentUser();
-  const isOwner = currentUser?.username === owner;
-  const [showEditForm, setShowEditForm] = useState(false);
+  const currentUser = useCurrentUser()
+  const isOwner = currentUser?.username === owner
+  const [showEditForm, setShowEditForm] = useState(false)
 
   return (
     <div className={styles.CommentContainer}>
@@ -58,9 +54,14 @@ const Comment = (props) => {
         <Media.Body className="align-self-center ml-2">
           <div className={styles.CommentHeader}>
             <span className={styles.Owner}>{owner}</span>
-            <span>{dayjs(updated_at).fromNow()}</span>
+            <span>
+              {moment(updated_at).startOf('second').fromNow() === 'Invalid date'
+                ? 'just now'
+                : moment(updated_at).startOf('second').fromNow()}
+            </span>
           </div>
-          {showEditForm ? (
+          {showEditForm
+            ? (
             <CommentEditForm
               id={id}
               profile_id={profile_id}
@@ -68,9 +69,10 @@ const Comment = (props) => {
               setComments={setComments}
               setShowEditForm={setShowEditForm}
             />
-          ) : (
+              )
+            : (
             <p>{content}</p>
-          )}
+              )}
         </Media.Body>
       </Media>
       {isOwner && !showEditForm && (
@@ -94,7 +96,8 @@ const Comment = (props) => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Comment;
+
+export default Comment

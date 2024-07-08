@@ -1,49 +1,54 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
-import { axiosReq } from '../../api/axiosDefaults';
-import { Container, Card, Badge } from 'react-bootstrap';
-import Asset from '../../components/Asset';
-import { useCurrentUser } from '../../contexts/CurrentUserContexts';
-import { DeleteDropdown } from '../../components/MoreDropdown';
-import Avatar from '../../components/Avatar';
-import styles from '../../styles/ReviewsPage.module.css';
+import React, { useEffect, useState } from 'react'
+import { useParams, useHistory } from 'react-router-dom'
+import { axiosReq } from '../../api/axiosDefaults'
+import { Container, Card, Badge } from 'react-bootstrap'
+import Asset from '../../components/Asset'
+import { useCurrentUser } from '../../contexts/CurrentUserContexts'
+import { DeleteDropdown } from '../../components/MoreDropdown'
+import Avatar from '../../components/Avatar'
+import styles from '../../styles/ReviewsPage.module.css'
 
-function ReviewPage() {
-  const { id } = useParams();
-  const [review, setReview] = useState(null);
-  const currentUser = useCurrentUser();
-  const history = useHistory();
+function ReviewPage () {
+  const { id } = useParams()
+  const [review, setReview] = useState(null)
+  const currentUser = useCurrentUser()
+  const history = useHistory()
 
   useEffect(() => {
     const fetchReview = async () => {
       try {
-        const { data } = await axiosReq.get(`/reviews/${id}/`);
-        setReview(data);
+        const { data } = await axiosReq.get(`/reviews/${id}/`)
+        setReview(data)
       } catch (err) {
-        console.error('Error fetching review:', err);
+        console.error('Error fetching review:', err)
       }
-    };
+    }
 
-    fetchReview();
-  }, [id]);
+    fetchReview()
+  }, [id])
 
   const handleDeleteReview = async () => {
     try {
-      await axiosReq.delete(`/reviews/${id}/`);
-      history.goBack(); 
+      await axiosReq.delete(`/reviews/${id}/`)
+      history.goBack()
     } catch (err) {
-      console.error('Error deleting review:', err);
+      console.error('Error deleting review:', err)
     }
-  };
+  }
 
   return (
     <Container className="py-4">
-      {review ? (
+      {review
+        ? (
         <Card className={styles.ReviewCard}>
           <Card.Body>
             <div className="d-flex justify-content-between align-items-center">
               <div className="d-flex align-items-center">
-                <Avatar src={review.profile_image} height={55} className={styles.Avatar} />
+                <Avatar
+                  src={review.profile_image}
+                  height={55}
+                  className={styles.Avatar}
+                />
                 <div className="ml-2">{review.owner}</div>
               </div>
               {currentUser && currentUser.username === review.owner && (
@@ -60,11 +65,12 @@ function ReviewPage() {
             <Card.Text>Game: {review.game_title}</Card.Text>
           </Card.Body>
         </Card>
-      ) : (
+          )
+        : (
         <Asset spinner />
-      )}
+          )}
     </Container>
-  );
+  )
 }
 
-export default ReviewPage;
+export default ReviewPage

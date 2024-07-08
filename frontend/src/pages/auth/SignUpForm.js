@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import React, { useState } from 'react'
+import { Link, useHistory } from 'react-router-dom'
 
-import styles from "../../styles/SignInUpForm.module.css";
-import btnStyles from "../../styles/Button.module.css";
-import appStyles from "../../App.module.css";
-import nintnedohero from "../../assets/images/signupform.png";
+import styles from '../../styles/SignInUpForm.module.css'
+import btnStyles from '../../styles/Button.module.css'
+import appStyles from '../../App.module.css'
+import nintnedohero from '../../assets/images/signupform.png'
 
 import {
   Form,
@@ -13,40 +13,40 @@ import {
   Col,
   Row,
   Container,
-  Alert,
-} from "react-bootstrap";
-import axios from "axios";
-import { useRedirect } from "../../hooks/useRedirect";
+  Alert
+} from 'react-bootstrap'
+import axios from 'axios'
+import { useRedirect } from '../../hooks/useRedirect'
 
 const SignUpForm = () => {
   useRedirect('loggedIn')
   const [signUpData, setSignUpData] = useState({
-    username: "",
-    password1: "",
-    password2: "",
-  });
-  const { username, password1, password2 } = signUpData;
+    username: '',
+    password1: '',
+    password2: ''
+  })
+  const { username, password1, password2 } = signUpData
 
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({})
 
-  const history = useHistory();
+  const history = useHistory()
 
   const handleChange = (event) => {
     setSignUpData({
       ...signUpData,
-      [event.target.name]: event.target.value,
-    });
-  };
+      [event.target.name]: event.target.value
+    })
+  }
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
     try {
-      await axios.post("/dj-rest-auth/registration/", signUpData);
-      history.push("/signin");
+      await axios.post('/dj-rest-auth/registration/', signUpData)
+      history.push('/signin')
     } catch (err) {
-      setErrors(err.response?.data);
+      setErrors(err.response?.data)
     }
-  };
+  }
 
   return (
     <Row className={styles.Row}>
@@ -118,7 +118,7 @@ const SignUpForm = () => {
         </Container>
         <Container className={`mt-3 ${appStyles.Content}`}>
           <Link className={styles.Link} to="/signin">
-          <span>Already have an account?</span> Sign in
+            <span>Already have an account?</span> Sign in
           </Link>
         </Container>
       </Col>
@@ -133,7 +133,7 @@ const SignUpForm = () => {
         />
       </Col>
     </Row>
-  );
-};
+  )
+}
 
-export default SignUpForm;
+export default SignUpForm

@@ -1,13 +1,14 @@
 @font-face {
-    font-family: "generalfont";
-    src: local("generalfont"), url("./assets/fonts/generalfont.ttf") format("truetype");
-  }
-
+  font-family: 'generalfont';
+  src:
+    local('generalfont'),
+    url('./assets/fonts/generalfont.ttf') format('truetype');
+}
 
 .App {
-   font-family: "generalfont", monospace;
-   background-color: #f0f0f0;
-   min-height: 100vh;
+  font-family: 'generalfont', monospace;
+  background-color: #f0f0f0;
+  min-height: 100vh;
 }
 
 .Main {

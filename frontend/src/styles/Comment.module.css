@@ -1,37 +1,39 @@
 .Owner {
-    font-weight: bold;
-    color: #ff2121;
-    margin-right: 8px;
-  }
-  
-  .Date {
-    font-weight: lighter;
-    color: #7c7c7c;
-  }
-  .DeleteButton {
-    background-color: red; 
-    color: white; 
-    border: none; 
-    padding: 5px 10px; 
-    cursor: pointer; 
-    margin-left: auto; 
-    display: flex;
-    align-items: center;
-    border-radius: 18px;
-  }
+  font-weight: bold;
+  color: #ff2121;
+  margin-right: 8px;
+}
 
-  .EditButton {
-    background-color: #fcd916; 
-    border: none;
-    padding: 5px 10px;
-    color: white;
-    border-radius: 18px;
-    margin-right: auto; 
-    display: flex;
-    transition: background-color 0.3s ease, opacity 0.3s ease; /* Smooth transition */
-  }
-  
-  .EditButton:hover {
-    background-color: rgba(255, 238, 1, 0.716); /* Less yellow / transparent */
-    opacity: 0.8; /* Less opaque */
-  }
+.Date {
+  font-weight: lighter;
+  color: #7c7c7c;
+}
+.DeleteButton {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  border-radius: 18px;
+}
+
+.EditButton {
+  background-color: #fcd916;
+  border: none;
+  padding: 5px 10px;
+  color: white;
+  border-radius: 18px;
+  margin-right: auto;
+  display: flex;
+  transition:
+    background-color 0.3s ease,
+    opacity 0.3s ease; /* Smooth transition */
+}
+
+.EditButton:hover {
+  background-color: rgba(255, 238, 1, 0.716); /* Less yellow / transparent */
+  opacity: 0.8; /* Less opaque */
+}

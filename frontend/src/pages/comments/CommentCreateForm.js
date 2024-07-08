@@ -1,58 +1,50 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+import Form from 'react-bootstrap/Form'
+import InputGroup from 'react-bootstrap/InputGroup'
+import styles from '../../styles/CommentCreateEditForm.module.css'
+import Avatar from '../../components/Avatar'
+import { axiosRes } from '../../api/axiosDefaults'
 
-import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
-
-import styles from "../../styles/CommentCreateEditForm.module.css";
-import Avatar from "../../components/Avatar";
-import { axiosRes } from "../../api/axiosDefaults";
-
-function CommentCreateForm(props) {
-  const { 
-    game,
-    setGame,
-    setComments,
-    profileImage,
-    profile_id
-  } = props;
-  const [content, setContent] = useState("");
+function CommentCreateForm (props) {
+  const { game, setGame, setComments, profile_image, profile_id } = props
+  const [content, setContent] = useState('')
 
   const handleChange = (event) => {
-    setContent(event.target.value);
-  };
+    setContent(event.target.value)
+  }
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
     try {
-      const { data } = await axiosRes.post("/comments/", {
+      const { data } = await axiosRes.post('/comments/', {
         content,
-        game,
-      });
+        game
+      })
       setComments((prevComments) => ({
         ...prevComments,
-        results: [data, ...prevComments.results],
-      }));
+        results: [data, ...prevComments.results]
+      }))
       setGame((prevGame) => ({
         results: [
           {
             ...prevGame.results[0],
-            comments_count: prevGame.results[0].comments_count + 1,
-          },
-        ],
-      }));
-      setContent("");
+            comments_count: prevGame.results[0].comments_count + 1
+          }
+        ]
+      }))
+      setContent('')
     } catch (err) {
-      
+      console.error('Error submitting comment:', err)
     }
-  };
+  }
 
   return (
     <Form className="mt-2" onSubmit={handleSubmit}>
       <Form.Group>
         <InputGroup>
           <Link to={`/profiles/${profile_id}`}>
-            <Avatar src={profileImage} />
+            <Avatar src={profile_image} />
           </Link>
           <Form.Control
             className={styles.Form}
@@ -72,7 +64,7 @@ function CommentCreateForm(props) {
         Submit
       </button>
     </Form>
-  );
+  )
 }
 
-export default CommentCreateForm;
+export default CommentCreateForm

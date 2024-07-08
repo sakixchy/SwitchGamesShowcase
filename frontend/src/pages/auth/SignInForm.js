@@ -1,62 +1,60 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import axios from "axios";
-import Form from "react-bootstrap/Form";
-import Alert from "react-bootstrap/Alert";
-import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import Image from "react-bootstrap/Image";
-import Container from "react-bootstrap/Container";
-import nintendohero from "../../assets/images/signupform.png";
-import { Link } from "react-router-dom";
-import styles from "../../styles/SignInUpForm.module.css";
-import btnStyles from "../../styles/Button.module.css";
-import appStyles from "../../App.module.css";
+import React, { useState } from 'react'
+import { useHistory, Link } from 'react-router-dom'
+import axios from 'axios'
+import Form from 'react-bootstrap/Form'
+import Alert from 'react-bootstrap/Alert'
+import Button from 'react-bootstrap/Button'
+import Col from 'react-bootstrap/Col'
+import Row from 'react-bootstrap/Row'
+import Image from 'react-bootstrap/Image'
+import Container from 'react-bootstrap/Container'
+import nintendohero from '../../assets/images/signupform.png'
+import styles from '../../styles/SignInUpForm.module.css'
+import btnStyles from '../../styles/Button.module.css'
+import appStyles from '../../App.module.css'
 
-import { useSetCurrentUser } from "../../contexts/CurrentUserContexts";
-import { useRedirect } from "../../hooks/useRedirect";
-import { setTokenTimestamp } from "../../utils/utils";
+import { useSetCurrentUser } from '../../contexts/CurrentUserContexts'
+import { useRedirect } from '../../hooks/useRedirect'
+import { setTokenTimestamp } from '../../utils/utils'
 
-function SignInForm() {
+function SignInForm () {
   const setCurrentUser = useSetCurrentUser()
   useRedirect('loggedIn')
 
   const [signInData, setSignInData] = useState({
-    username: "",
-    password: "",
-  });
+    username: '',
+    password: ''
+  })
 
-  const [errors, setErrors] = useState(null);
-  const history = useHistory();
+  const [errors, setErrors] = useState(null)
+  const history = useHistory()
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
     if (!signInData.username || !signInData.password) {
-      setErrors("Both fields are required.");
-      return;
+      setErrors('Both fields are required.')
+      return
     }
 
-    setErrors(null);
-   
+    setErrors(null)
+
     try {
-       const {data} = await axios.post("/dj-rest-auth/login/", signInData);
-       setCurrentUser(data.user)
-       setTokenTimestamp(data)
-       history.goBack();
+      const { data } = await axios.post('/dj-rest-auth/login/', signInData)
+      setCurrentUser(data.user)
+      setTokenTimestamp(data)
+      history.goBack()
     } catch (err) {
-       setErrors("Error during sign-in. Please check your credentials.");
-      
+      setErrors('Error during sign-in. Please check your credentials.')
     }
-  };
+  }
 
   const handleChange = (event) => {
     setSignInData({
       ...signInData,
-      [event.target.name]: event.target.value,
-    });
-  };
+      [event.target.name]: event.target.value
+    })
+  }
 
   return (
     <Row className={styles.Row}>
@@ -69,7 +67,7 @@ function SignInForm() {
               {errors}
             </Alert>
           )}
-          
+
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="username">
               <Form.Label className="d-none">Username</Form.Label>
@@ -94,7 +92,7 @@ function SignInForm() {
                 className={styles.Input}
               />
             </Form.Group>
-            
+
             <Button
               className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Bright}`}
               type="submit"
@@ -105,7 +103,7 @@ function SignInForm() {
         </Container>
         <Container className={`mt-3 ${appStyles.Content}`}>
           <Link className={styles.Link} to="/signup">
-            <span>Don't have an account?</span> Sign Up
+            <span>Don&apos;t have an account?</span> Sign Up
           </Link>
         </Container>
       </Col>
@@ -120,7 +118,7 @@ function SignInForm() {
         />
       </Col>
     </Row>
-  );
+  )
 }
 
-export default SignInForm;
+export default SignInForm

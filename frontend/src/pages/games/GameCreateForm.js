@@ -1,70 +1,68 @@
-import React, { useRef, useState } from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-import Alert from "react-bootstrap/Alert";
-import { Image } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
-import { axiosReq } from "../../api/axiosDefaults";
-import upload from "../../assets/images/upload-graphic.png";
-import styles from "../../styles/GameCreateEditForm.module.css";
-import appStyles from "../../App.module.css";
-import btnStyles from "../../styles/Button.module.css";
-import Asset from "../../components/Asset";
-import { useRedirect } from "../../hooks/useRedirect";
+import React, { useRef, useState } from 'react'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Container from 'react-bootstrap/Container'
+import Alert from 'react-bootstrap/Alert'
+import { Image } from 'react-bootstrap'
+import { useHistory } from 'react-router-dom'
+import { axiosReq } from '../../api/axiosDefaults'
+import upload from '../../assets/images/upload-graphic.png'
+import styles from '../../styles/GameCreateEditForm.module.css'
+import appStyles from '../../App.module.css'
+import btnStyles from '../../styles/Button.module.css'
+import Asset from '../../components/Asset'
+import { useRedirect } from '../../hooks/useRedirect'
 
-
-function GameCreateForm() {
+function GameCreateForm () {
   useRedirect('loggedOut')
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({})
   const [postData, setPostData] = useState({
-    title: "",
-    description: "",
-    cover_image: "",
-    genre:"",
-  });
-  const { title, description, cover_image, genre } = postData;
+    title: '',
+    description: '',
+    cover_image: '',
+    genre: ''
+  })
+  const { title, description, cover_image, genre } = postData
 
-  const imageInput = useRef(null);
-  const history = useHistory();
+  const imageInput = useRef(null)
+  const history = useHistory()
 
   const handleChange = (event) => {
     setPostData({
       ...postData,
-      [event.target.name]: event.target.value,
-    });
-  };
+      [event.target.name]: event.target.value
+    })
+  }
 
   const handleChangeImage = (event) => {
     if (event.target.files.length > 0) {
-      URL.revokeObjectURL(cover_image);
+      URL.revokeObjectURL(cover_image)
       setPostData({
         ...postData,
-        cover_image: URL.createObjectURL(event.target.files[0]),
-      });
+        cover_image: URL.createObjectURL(event.target.files[0])
+      })
     }
-  };
+  }
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
     try {
-      const formData = new FormData();
-      formData.append("title", title);
-      formData.append("description", description);
-      formData.append("cover_image", imageInput.current.files[0]);
-      formData.append("genre", genre )
+      const formData = new FormData()
+      formData.append('title', title)
+      formData.append('description', description)
+      formData.append('cover_image', imageInput.current.files[0])
+      formData.append('genre', genre)
 
-      const { data } = await axiosReq.post('/games/', formData);
-      history.push(`/games/${data.id}`);
+      const { data } = await axiosReq.post('/games/', formData)
+      history.push(`/games/${data.id}`)
     } catch (err) {
-     
       if (err.response?.status !== 401) {
-        setErrors(err.response?.data);
+        setErrors(err.response?.data)
       }
     }
-  };
+  }
 
   const genreOptions = [
     { value: '', label: 'Select Genre' },
@@ -74,8 +72,7 @@ function GameCreateForm() {
     { value: 'action', label: 'Action' },
     { value: 'adventure', label: 'Adventure' },
     { value: 'fighting', label: 'Fighting' },
-    { value: 'classic', label: 'Classic' },
-    
+    { value: 'classic', label: 'Classic' }
   ]
 
   const textFields = (
@@ -89,11 +86,12 @@ function GameCreateForm() {
           onChange={handleChange}
         />
       </Form.Group>
-      {errors?.title && errors.title.map((message, idx) => (
-        <Alert variant="warning" key={idx}>
-          {message}
-        </Alert>
-      ))}
+      {errors?.title &&
+        errors.title.map((message, idx) => (
+          <Alert variant="warning" key={idx}>
+            {message}
+          </Alert>
+        ))}
       <Form.Group>
         <Form.Label>Description</Form.Label>
         <Form.Control
@@ -104,12 +102,13 @@ function GameCreateForm() {
           onChange={handleChange}
         />
       </Form.Group>
-      {errors?.description && errors.description.map((message, idx) => (
-        <Alert variant="warning" key={idx}>
-          {message}
-        </Alert>
-      ))}
-       <Form.Group>
+      {errors?.description &&
+        errors.description.map((message, idx) => (
+          <Alert variant="warning" key={idx}>
+            {message}
+          </Alert>
+        ))}
+      <Form.Group>
         <Form.Label>Genre</Form.Label>
         <Form.Control
           as="select"
@@ -124,11 +123,12 @@ function GameCreateForm() {
           ))}
         </Form.Control>
       </Form.Group>
-      {errors?.genre && errors.genre.map((message, idx) => (
-        <Alert variant="warning" key={idx}>
-          {message}
-        </Alert>
-      ))}
+      {errors?.genre &&
+        errors.genre.map((message, idx) => (
+          <Alert variant="warning" key={idx}>
+            {message}
+          </Alert>
+        ))}
       <Button
         className={`${btnStyles.Button} ${btnStyles.Blue}`}
         onClick={() => history.goBack()}
@@ -139,7 +139,7 @@ function GameCreateForm() {
         List a game
       </Button>
     </div>
-  );
+  )
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -149,10 +149,16 @@ function GameCreateForm() {
             className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
           >
             <Form.Group className="text-center">
-              {cover_image ? (
+              {cover_image
+                ? (
                 <>
                   <figure>
-                    <Image style={{ maxWidth: 400}} className={appStyles.Image} src={cover_image} rounded />
+                    <Image
+                      style={{ maxWidth: 400 }}
+                      className={appStyles.Image}
+                      src={cover_image}
+                      rounded
+                    />
                   </figure>
                   <div>
                     <Form.Label
@@ -163,19 +169,23 @@ function GameCreateForm() {
                     </Form.Label>
                   </div>
                 </>
-              ) : (
+                  )
+                : (
                 <Form.Label
                   className="d-flex justify-content-center"
                   htmlFor="image-upload"
                 >
-                  <Asset src={upload} message="Click or tap to upload an image" />
+                  <Asset
+                    src={upload}
+                    message="Click or tap to upload an image"
+                  />
                 </Form.Label>
-              )}
+                  )}
 
               <Form.File
                 id="image-upload"
                 accept="image/*"
-                style={{ display: "none" }}
+                style={{ display: 'none' }}
                 onChange={handleChangeImage}
                 ref={imageInput}
               />
@@ -188,7 +198,7 @@ function GameCreateForm() {
         </Col>
       </Row>
     </Form>
-  );
+  )
 }
 
-export default GameCreateForm;
+export default GameCreateForm

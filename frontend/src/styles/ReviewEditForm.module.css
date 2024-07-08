@@ -1,20 +1,20 @@
 .Form {
-    border: none;
-    border-bottom: 2px #ff1111 solid;
-  }
-  
-  .Button {
-    border: none;
-    background-color: #a409f7;
-    color: rgb(255, 255, 255);
-    border-radius: 100px;
-    padding: 4px 10px;
-    min-width: 75px;
-    margin: 5px;
-  }
-  
-  .Button:hover {
-    cursor: pointer;
-    background-color: rgb(255, 255, 255);
-    color: hsl(272, 100%, 72%);
-  }
+  border: none;
+  border-bottom: 2px #ff1111 solid;
+}
+
+.Button {
+  border: none;
+  background-color: #a409f7;
+  color: rgb(255, 255, 255);
+  border-radius: 100px;
+  padding: 4px 10px;
+  min-width: 75px;
+  margin: 5px;
+}
+
+.Button:hover {
+  cursor: pointer;
+  background-color: rgb(255, 255, 255);
+  color: hsl(272, 100%, 72%);
+}

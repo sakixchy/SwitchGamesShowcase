@@ -1,61 +1,60 @@
-import React, { useEffect, useState } from "react";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import Container from "react-bootstrap/Container";
-import Asset from "../../components/Asset";
-import styles from "../../styles/ProfilePage.module.css";
-import appStyles from "../../App.module.css";
-import btnStyles from "../../styles/Button.module.css";
-import PopularProfiles from "./PopularProfiles";
-import { useCurrentUser } from "../../contexts/CurrentUserContexts";
-import { useParams } from "react-router-dom";
-import { axiosReq } from "../../api/axiosDefaults";
-import { useProfileData, useSetProfileData } from "../../contexts/ProfileDataContext";
-import { Button, Image } from "react-bootstrap";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { fetchMoreData } from "../../utils/utils";
-import NoResults from "../../assets/images/luigi-no-results.png";
-import Game from "../games/Game";
-import { ProfileEditDropdown } from "../../components/MoreDropdown";
+import React, { useEffect, useState } from 'react'
+import Col from 'react-bootstrap/Col'
+import Row from 'react-bootstrap/Row'
+import Container from 'react-bootstrap/Container'
+import Asset from '../../components/Asset'
+import styles from '../../styles/ProfilePage.module.css'
+import appStyles from '../../App.module.css'
+import btnStyles from '../../styles/Button.module.css'
+import PopularProfiles from './PopularProfiles'
+import { useCurrentUser } from '../../contexts/CurrentUserContexts'
+import { useParams } from 'react-router-dom'
+import { axiosReq } from '../../api/axiosDefaults'
+import {
+  useProfileData,
+  useSetProfileData
+} from '../../contexts/ProfileDataContext'
+import { Button, Image } from 'react-bootstrap'
+import InfiniteScroll from 'react-infinite-scroll-component'
+import { fetchMoreData } from '../../utils/utils'
+import NoResults from '../../assets/images/luigi-no-results.png'
+import Game from '../games/Game'
+import { ProfileEditDropdown } from '../../components/MoreDropdown'
 
+function ProfilePage () {
+  const [hasLoaded, setHasLoaded] = useState(false)
+  const currentUser = useCurrentUser()
+  const { id } = useParams()
+  const { setProfileData, handleFollow, handleUnfollow } = useSetProfileData()
+  const { pageProfile } = useProfileData()
+  const [profile] = pageProfile.results
+  const isOwner = currentUser?.username === profile?.owner
 
-
-function ProfilePage() {
-  const [hasLoaded, setHasLoaded] = useState(false);
-  const currentUser = useCurrentUser();
-  const { id } = useParams();
-  const {setProfileData, handleFollow, handleUnfollow} = useSetProfileData();
-  const { pageProfile } = useProfileData();
-  const [profile] = pageProfile.results;
-  const isOwner = currentUser?.username === profile?.owner;
-
-  const [profileGames, setProfileGames] = useState({ results: [] });
+  const [profileGames, setProfileGames] = useState({ results: [] })
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [{ data: pageProfile } , { data: profileGames }] = await Promise.all([
+        const [{ data: pageProfile }, { data: profileGames }] =
+          await Promise.all([
             axiosReq.get(`/profiles/${id}/`),
-            axiosReq.get(`/games/?owner__profile=${id}`),
-          ]);
+            axiosReq.get(`/games/?owner__profile=${id}`)
+          ])
         setProfileData((prevState) => ({
           ...prevState,
-          pageProfile: { results: [pageProfile] },
-        }));
-        setProfileGames(profileGames);
-        setHasLoaded(true);
-      } catch (err) {
-
-      }
-    };
-    fetchData();
-  }, [id, setProfileData]);
-
+          pageProfile: { results: [pageProfile] }
+        }))
+        setProfileGames(profileGames)
+        setHasLoaded(true)
+      } catch (err) {}
+    }
+    fetchData()
+  }, [id, setProfileData])
 
   const mainProfile = (
     <>
       <Row noGutters className="px-3 text-center">
-      {profile?.is_owner && <ProfileEditDropdown id={profile?.id} />}
+        {profile?.is_owner && <ProfileEditDropdown id={profile?.id} />}
         <Col lg={3} className="text-lg-left">
           <Image
             className={styles.ProfileImage}
@@ -85,33 +84,36 @@ function ProfilePage() {
         <Col lg={3} className="text-lg-right">
           {currentUser &&
             !isOwner &&
-            (profile?.following_id ? (
+            (profile?.following_id
+              ? (
               <Button
                 className={`${btnStyles.Button} ${btnStyles.BlackOutline}`}
-                onClick={()=>handleUnfollow(profile)}
+                onClick={() => handleUnfollow(profile)}
               >
                 Unfollow
               </Button>
-            ) : (
+                )
+              : (
               <Button
                 className={`${btnStyles.Button} ${btnStyles.Black}`}
-                onClick={()=>handleFollow(profile)}
+                onClick={() => handleFollow(profile)}
               >
                 Follow
               </Button>
-            ))}
+                ))}
         </Col>
         {profile?.content && <Col className="p-3">{profile.content}</Col>}
       </Row>
     </>
-  );
+  )
 
   const mainProfileGames = (
     <>
       <hr />
-      <p className="text-center">{profile?.owner}'s games</p>
+      <p className="text-center">{profile?.owner}&apos;s games</p>
       <hr />
-      {profileGames.results.length ? (
+      {profileGames.results.length
+        ? (
         <InfiniteScroll
           children={profileGames.results.map((game) => (
             <Game key={game.id} {...game} setGames={setProfileGames} />
@@ -121,35 +123,38 @@ function ProfilePage() {
           hasMore={!!profileGames.next}
           next={() => fetchMoreData(profileGames, setProfileGames)}
         />
-      ) : (
+          )
+        : (
         <Asset
           src={NoResults}
           message={`No results found, ${profile?.owner} hasn't listed any games yet.`}
         />
-      )}
+          )}
     </>
-  );
+  )
 
   return (
     <Row>
       <Col className="py-2 p-0 p-lg-2" lg={8}>
         <PopularProfiles mobile />
         <Container className={appStyles.Content}>
-          {hasLoaded ? (
+          {hasLoaded
+            ? (
             <>
               {mainProfile}
               {mainProfileGames}
             </>
-          ) : (
+              )
+            : (
             <Asset spinner />
-          )}
+              )}
         </Container>
       </Col>
       <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
         <PopularProfiles />
       </Col>
     </Row>
-  );
+  )
 }
 
-export default ProfilePage;
+export default ProfilePage

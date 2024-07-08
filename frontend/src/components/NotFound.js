@@ -1,14 +1,14 @@
 import React from 'react'
-import NoResults from '../assets/images/luigi-no-results.png';
+import NoResults from '../assets/images/luigi-no-results.png'
 import styles from '../styles/NotFound.module.css'
-import Asset from './Asset';
+import Asset from './Asset'
 
 const NotFound = () => {
   return (
     <div className={styles.Container}>
-        <Asset
+      <Asset
         src={NoResults}
-        message={`Sorry, the page you're looking for doesn't exist`}
+        message={'Sorry, the page you\'re looking for doesn\'t exist'}
       />
     </div>
   )

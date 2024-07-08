@@ -1,28 +1,27 @@
-import React from "react";
-import Dropdown from "react-bootstrap/Dropdown";
-import styles from "../styles/MoreDropdown.module.css";
-import { useHistory } from "react-router-dom";
+import React from 'react'
+import Dropdown from 'react-bootstrap/Dropdown'
+import styles from '../styles/MoreDropdown.module.css'
+import { useHistory } from 'react-router-dom'
 
 const ThreeDots = React.forwardRef(({ onClick }, ref) => (
   <i
     className="fas fa-ellipsis-v"
     ref={ref}
     onClick={(e) => {
-      e.preventDefault();
-      onClick(e);
+      e.preventDefault()
+      onClick(e)
     }}
   />
-));
+))
 
 export const MoreDropdown = ({ handleEdit, handleDelete }) => {
-
   return (
     <Dropdown className="ml-auto" drop="left">
       <Dropdown.Toggle as={ThreeDots} />
 
       <Dropdown.Menu
         className="text-center"
-        popperConfig={{ strategy: "fixed" }}
+        popperConfig={{ strategy: 'fixed' }}
       >
         <Dropdown.Item
           className={styles.DropdownItem}
@@ -40,11 +39,11 @@ export const MoreDropdown = ({ handleEdit, handleDelete }) => {
         </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
-  );
-};
+  )
+}
 
 export const ProfileEditDropdown = ({ id }) => {
-  const history = useHistory();
+  const history = useHistory()
   return (
     <Dropdown className={`ml-auto px-3 ${styles.Absolute}`} drop="left">
       <Dropdown.Toggle as={ThreeDots} />
@@ -71,19 +70,17 @@ export const ProfileEditDropdown = ({ id }) => {
         </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
-  );
-};
-
+  )
+}
 
 export const DeleteDropdown = ({ handleDelete }) => {
-
   return (
     <Dropdown className="ml-auto" drop="left">
       <Dropdown.Toggle as={ThreeDots} />
 
       <Dropdown.Menu
         className="text-center"
-        popperConfig={{ strategy: "fixed" }}
+        popperConfig={{ strategy: 'fixed' }}
       >
         <Dropdown.Item
           className={styles.DropdownItem}
@@ -94,5 +91,5 @@ export const DeleteDropdown = ({ handleDelete }) => {
         </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
-  );
-};
+  )
+}

@@ -209,6 +209,19 @@ Name, Password, Bio and Avatar <br>
 ![edit profile alt feature](readme/assets/features/changeusername-feature.png) <br>
 ![edit profile alt feature](readme/assets/features/passwordchange-feature.png)
 
+### Reusable Components
+- Navbar
+The Navbar component is used to create a consistent navigation bar across different pages of the application.  <br>
+- Avatar
+The Avatar component is used to display a user's profile picture. <br>
+- Asset
+The Asset component is used to handle and display various types of assets, such as loading spinners, images, or messages indicating no results.
+- MoreDropdown
+The MoreDropdown component provides a dropdown menu with additional options or actions related to the current context, such as editing or deleting content. It’s commonly used for actions that should be hidden under a "more" button to keep the UI clean.
+- NotFound
+The NotFound component is a generic component used to display a 404 error message when a user navigates to a route that doesn't exist.
+
+
 ### Future Features
 1. **Filter Games by Genre** <br>
 Feature Description: Introduce a filtering system that allows users to search for games based on their genre. <br>
@@ -489,6 +502,10 @@ All python code passed the CI Python Linter pep8 Standard check.
 ![light house mobile](readme/assets/lh-mobile.png)
 The Performance score is currently suboptimal due to the manner in which images are loaded on the website. These images are served through Cloudinary, a third-party service that handles image storage and delivery.
 
+### Eslinter Testing
+All errors have been resolved. Some erorrs prevented my site from working optimally and wouldn't function so i had to make adjustments. <br>
+![eslinter test](readme/assets/eslinter-testing.png)
+
 ### Browser Testing
 <table  border="3" cellspacing="0" cellpadding="5">
 <tr>
@@ -512,4 +529,9 @@ The Performance score is currently suboptimal due to the manner in which images 
 <th>&#x2714;</th>
 </tr>
 </table>
-___
+
+## Bugs 
+No bugs foumd.
+
+## Deployment
+
