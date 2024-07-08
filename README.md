@@ -425,7 +425,91 @@ Please refer to the [Manual Testing Documentation](TESTING.md) for a complete ov
 - Sign Up
 ![signup validator check](readme/assets/code-validatons/html-validation-success.png)
 
-- CSS Validator by [W3C Jigsaw](https://jigsaw.w3.org/css-validator/)
+### CSS Validator by [W3C Jigsaw](https://jigsaw.w3.org/css-validator/)
 All CSS code passed the Validator checks. <br>
 ![css validation success](readme/assets/code-validatons/css-validation-success.png)
 
+### Python [Linter](https://pep8ci.herokuapp.com/)
+All python code passed the CI Python Linter pep8 Standard check.
+1. drf-api-sgr 
+ - models &#x2714;
+ - serializers &#x2714;
+ - views &#x2714;
+ - permissions &#x2714;
+ - settings &#x2714;
+ - urls &#x2714;
+
+2. comments
+ - admin &#x2714;
+ - models &#x2714;
+ - serializers &#x2714;
+ - views &#x2714;
+ - urls &#x2714;
+
+3. follower
+ - admin &#x2714;
+ - models &#x2714;
+ - serializers &#x2714;
+ - views &#x2714;
+ - urls &#x2714;
+
+4. games
+ - admin &#x2714;
+ - models &#x2714;
+ - serializers &#x2714;
+ - views &#x2714;
+ - urls &#x2714;
+
+5. likes
+ - admin &#x2714;
+ - models &#x2714;
+ - serializers &#x2714;
+ - views &#x2714;
+ - urls &#x2714;
+
+6. profiles
+ - admin &#x2714;
+ - models &#x2714;
+ - serializers &#x2714;
+ - views &#x2714;
+ - urls &#x2714;
+
+7. reviews
+ - admin &#x2714;
+ - models &#x2714;
+ - serializers &#x2714;
+ - views &#x2714;
+ - urls &#x2714;
+
+### Lighthouse
+- Desktop 
+![light house desktop](readme/assets/lh-desktop.png)
+
+- Mobile
+![light house mobile](readme/assets/lh-mobile.png)
+The Performance score is currently suboptimal due to the manner in which images are loaded on the website. These images are served through Cloudinary, a third-party service that handles image storage and delivery.
+
+### Browser Testing
+<table  border="3" cellspacing="0" cellpadding="5">
+<tr>
+<th>Browser</th>
+<th>Layout</th>
+<th>Functionality</th>
+</tr>
+<tr>
+<th>Chrome</th>
+<th>&#x2714;</th>
+<th>&#x2714;</th>
+</tr>
+<tr>
+<th>Firefox</th>
+<th>&#x2714;</th>
+<th>&#x2714;</th>
+</tr>
+<tr>
+<th>Safari</th>
+<th>&#x2714;</th>
+<th>&#x2714;</th>
+</tr>
+</table>
+___

@@ -6,7 +6,10 @@ import styles from "../../styles/Comment.module.css";
 import { axiosRes } from "../../api/axiosDefaults";
 import { useCurrentUser } from "../../contexts/CurrentUserContexts";
 import CommentEditForm from "./CommentEditForm";
-import moment from 'moment';
+import dayjs from 'dayjs'; 
+import relativeTime from 'dayjs/plugin/relativeTime';
+
+dayjs.extend(relativeTime);
 
 const Comment = (props) => {
   const {
@@ -55,7 +58,7 @@ const Comment = (props) => {
         <Media.Body className="align-self-center ml-2">
           <div className={styles.CommentHeader}>
             <span className={styles.Owner}>{owner}</span>
-            <span>{moment(updated_at).fromNow()}</span> 
+            <span>{dayjs(updated_at).fromNow()}</span>
           </div>
           {showEditForm ? (
             <CommentEditForm
