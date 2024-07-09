@@ -399,17 +399,18 @@ The CRUD functionality is integrated into both game and profile entities. These 
 
 ### Frontend
 #### Core Libraries and Frameworks
-- React 
-- React Router DOM
-
+- React: Components based structure and interactive user interface.
+- React Router DOM: seamless navigation between different components or views.
 #### UI Components and Styling
-- React Bootstrap
-- React Infinite Scroll Component 
+- React Bootstrap: Simplifies the creation of responsive and visually appealing UI components using Bootstrap's styling.
+- React Infinite Scroll Component: Enhances user experience by enabling infinite scrolling for dynamic data loading.
 
 #### Data Handling and State Management
-- Axios
-- JWT Decode 
-- Moment
+- Axios: for making HTTP requests and handling API interactions.
+- JWT Decode: Allows easy decoding and verification of JSON Web Tokens for authentication.
+- Moment: Simplifies date and time manipulation and formatting.
+#### JS Testing
+- Eslint for testing code fo rany errors or bad practices.
 ___
 ## Testing 
 ### Manual Testing
