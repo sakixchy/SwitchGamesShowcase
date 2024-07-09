@@ -507,7 +507,7 @@ All errors have been resolved. Some erorrs prevented my site from working optima
 ![eslinter test](readme/assets/eslinter-testing.png)
 
 ### Browser Testing
-<table  border="3" cellspacing="0" cellpadding="5">
+<table border="3" cellspacing="0" cellpadding="5">
 <tr>
 <th>Browser</th>
 <th>Layout</th>
@@ -534,4 +534,70 @@ All errors have been resolved. Some erorrs prevented my site from working optima
 No bugs foumd.
 
 ## Deployment
+### GitHub 
+The project was initiated by selecting the CI template and clicking 'Use this template' to create a new repository. After giving a name to the repository, development began in Gitpod, where the entire project was built. The project planning involved the Principals of Agile methodology. User stories were added toproject to keep track of progress.
 
+### Heroku 
+The site is being hosted on Heroku. Here are the steps required to launch the application:
+
+1. Use the pip freeze > requirements.txt commmand to store the required libararies that need to be installed prior to running the app.
+2. Either Login or Create an account with Heroku. Then select newfrom the top left of dashboard, then sleect Create new app from the list menu.
+3. Enter a desired name for your app, choose a region based on your location and finally click on Create app.
+4. Navigate over to Settings tab from Heroku dashboard and scroll down to Config Vars and click Reveal Config Vars.
+5. Secure the SECRET_KEY by storing it in a separate file named env.py. Then, add env.py to the '.gitignore' file. Ensure to assign the value of SECRET_KEY as os.environ.get('DJANGO_SECRET_KEY') in the env.py file.
+6. Either create or login to your Cloudinary account.
+7. Head over to 'Product Environment Credentials' section from dashboard on Cloudianry and locate 'API Environment Variable'.
+8. Copy the url from this point: (cloudinary://...) and paste it over to Heroku's Config Vars settings.
+9. The 'KEY' should be CLOUDINARY_URL and 'VALUE' will be YOUR OWN URL.
+10. Either create or login to your Elephant SQL accoount.
+11. CLick 'Create New Instance', then give it a desired name along with choosing the 'Tiny Tutrle (Free)' plan, leave tags field empty and click 'Select Region'.
+12. A dropdown will appear with a list of data centers, from there choose that's nearest to your location and click 'Review'
+13. Copy the database URL from the 'Details' panel and paste it into your 'Config Vars' on Heroku.
+14. The 'KEY' should be DATABASE_URL and 'VALUE' will be YOUR OWN URL.
+15. Add DJANGO_SECRET_KEY to 'Config Vars'.
+16. Navigate over to Deploy tab and select the repository for deployment.
+17. Scroll down to Manual Deployment section and click Deploy.
+18. Wait for the app to build, then click View.
+
+## Fork Repository
+Forking a repository allows you to create a copy of your existing repository, which enables the possibility of making changes and modifying the repository without affecting the original one.
+
+1. Choose the repository on GitHub.
+2. Click on Fork button on the top-right corner of the panel.
+3. Click on Create New Fork to sucessfuly fork the repository. (Note you can't fork your own repository unless you're in an orginazaion).
+
+## Clone Repository
+1. On the Home of the Nintendo Games Showcase in Github.
+2. Click on the green Code button.
+3. Copy the HTTPS link under Clone sub heading.
+4. Open any code editor.
+5. Type in git clone in the terminal and paste the url from earlier.
+6. Press Enter to create a local version of this repository.
+7. Download this the repository.
+
+## Download Repository
+1. On the Home of the Anime Reviews in Github.
+2. Click on the green Code button.
+3. Select Download ZIP at the bottom.
+4. Save the folder and extract it to desired location.
+5. Open any Code Editor.
+6. Find the repository from where it was saved on the system.
+7. Open it and the respository will be available to work offline.
+___
+## Credits
+### Media
+Sign In / Sign Up Hero Image taken from [here](https://mario.nintendo.com/static/8c6204c736bab37b6912e6791447541f/c40f8/footer-characters.png) <br>
+Favicon taken from [here](https://icon-icons.com/icon/nintendo-switch/136357) <br>
+Navbar brand logo taken from [here](https://freebiesupply.com/logos/nintendo-logo-3/) <br>
+Default Avatar taken from [here](https://www.pinterest.com/pin/1108518895750361959/) <br>
+
+### Typography 
+The font used primarily was taken from [here](https://www.fontspace.com/ro-blueshell-font-f80421)
+
+### Code
+The project was inspired by Code Institute's walkthrough project called "Moments".
+How to add custom fonts from [here](https://dev.to/ziqinyeow/how-to-add-custom-font-file-to-your-react-app-31kb)
+
+## Acknowledgments 
+Completing this final project was a challenging yet rewarding experience. I am elated to have ended it on a positive note. <br>
+I would like to extend my heartfelt gratitude to my mentor, Jubril, for his unwavering support and guidance throughout this journey. Also, thanks to evryone in Slack for giving me all the feedbacks.
